@@ -1,10 +1,10 @@
 // Project: words-api
-// File: VerbRecord.cs
+// File: PropackRecord.cs
 // 
 // Author: Ethan Kisiel (ethan.a.kisiel@gmail.com)
 // 
-// File Created: 23 08 2025 23:08:38
-// Last Modified: 23 08 2025 23:08:38
+// File Created: 24 08 2025 00:08:03
+// Last Modified: 24 08 2025 00:08:03
 // 
 // Modified By: Ethan Kisiel (ethan.a.kisiel@gmail.com>)
 // 
@@ -12,12 +12,10 @@
 
 namespace words_api.Lib.BridgeRecords;
 
-public class VerbRecord
+public class PropackRecord
 {
     public string Declension { get; set; }
-    public string Tense { get; set; }
-    public string Voice { get; set; }
-    public string Mood { get; set; }
-    public string Person { get; set; }
+    public string Case { get; set; }
     public string Number { get; set; }
+    public string Gender { get; set; }
 }
