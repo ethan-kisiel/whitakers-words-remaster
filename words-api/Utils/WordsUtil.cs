@@ -14,11 +14,11 @@ using System.Diagnostics;
 
 namespace words_api.Utils;
 
-public class WWUtil
+public class WordsUtil
 {
     private readonly string _wordsPath;
 
-    public WWUtil(string wordsPath = "bin/words") // path inside Docker
+    public WordsUtil(string wordsPath = "bin/words") // path inside Docker
     {
         _wordsPath = wordsPath;
     }
@@ -40,12 +40,12 @@ public class WWUtil
 
         string output = process.StandardOutput.ReadToEnd();
         string error = process.StandardError.ReadToEnd();
-
+        
         process.WaitForExit();
         
         if (process.ExitCode != 0)
         {
-            throw new Exception($"Ada process failed: {error}");
+            throw new Exception($"Words process failed: {error}");
         }
         
         return output;

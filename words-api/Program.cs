@@ -8,6 +8,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+var translate = app.MapGroup("/translate");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -18,13 +19,27 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-WWUtil wwUtil = new WWUtil();
+WordsUtil wordsUtil = new WordsUtil();
 
-app.MapGet("/ww/{word}", (string word) =>
+
+translate.MapGet("/to-english/{entry}", (string entry) =>
 {
     try
     {
-        return wwUtil.Run($"{word}");
+        return wordsUtil.Run($"{entry}");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+        return "";
+    }
+});
+
+translate.MapGet("/to-latin/{entry}", (string entry) =>
+{
+    try
+    {
+        return wordsUtil.Run($"~e {entry}");
     }
     catch (Exception ex)
     {
