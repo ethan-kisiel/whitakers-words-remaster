@@ -10,6 +10,7 @@
 // 
 // Copyright 2025 - 2025 Ethan Kisiel, Ethan Kisiel
 
+using words_api.Lib.BridgeRecords;
 using words_api.Lib.Interfaces;
 
 namespace words_api.Lib;
@@ -17,6 +18,7 @@ namespace words_api.Lib;
 public class LatinLookup: LookupBase
 {
     public string Root { get; set; } = "";
+    public RecordBase[] RecordMatches { get; set; } = [];
     public string[] Meanings { get; set; } = [];
     public DictionaryCodes DictionaryCodes { get; set; }
 }

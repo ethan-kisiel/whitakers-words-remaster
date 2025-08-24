@@ -22,20 +22,21 @@ app.UseHttpsRedirection();
 WordsUtil wordsUtil = new WordsUtil();
 
 
-translate.MapGet("/to-english/{entry}", (string entry) =>
+translate.MapGet("/latin/{entry}", (string entry) =>
 {
     try
     {
-        return wordsUtil.Run($"{entry}");
+        var result = wordsUtil.Run($"{entry}");
+        return WordsParser.ParseLatinSearch(result);
     }
     catch (Exception ex)
     {
         Console.WriteLine(ex.Message);
-        return "";
+        return [];
     }
 });
 
-translate.MapGet("/to-latin/{entry}", (string entry) =>
+translate.MapGet("/english/{entry}", (string entry) =>
 {
     try
     {

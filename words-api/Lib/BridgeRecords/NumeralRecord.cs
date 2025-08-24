@@ -10,13 +10,30 @@
 // 
 // Copyright 2025 - 2025 Ethan Kisiel, Ethan Kisiel
 
+using System.Text.Json;
+using words_api.Lib.Enums;
+
 namespace words_api.Lib.BridgeRecords;
 
-public class Numeral
+public class NumeralRecord: RecordBase
 {
     public string Declension { get; set; }
     public string Case { get; set; }
     public string Number { get; set; }
     public string Gender { get; set; }
     public string NumeralSort { get; set; }
+
+    public NumeralRecord(string wordMatch, string declension, string wordCase, string number, string gender, string numeralSort): base(wordMatch, PartsOfSpeech.Number)
+    {
+        Declension = declension;
+        Case = wordCase;
+        Number = number;
+        Gender = gender;
+        NumeralSort = numeralSort;
+    }
+    
+    public override string ToJson()
+    {
+        return JsonSerializer.Serialize(this);
+    }
 }

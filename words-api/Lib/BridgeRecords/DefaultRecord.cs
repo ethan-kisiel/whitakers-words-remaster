@@ -10,12 +10,18 @@
 // 
 // Copyright 2025 - 2025 Ethan Kisiel, Ethan Kisiel
 
+using System.Text.Json;
+
 namespace words_api.Lib.BridgeRecords;
 
-public class PropackRecord
+public class DefaultRecord: RecordBase
 {
-    public string Declension { get; set; }
-    public string Case { get; set; }
-    public string Number { get; set; }
-    public string Gender { get; set; }
+    public DefaultRecord(string wordMatch, string partOfSpeech): base(wordMatch, partOfSpeech)
+    {
+    }
+    
+    public override string ToJson()
+    {
+        return JsonSerializer.Serialize(this);
+    }
 }

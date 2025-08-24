@@ -144,15 +144,12 @@ package body Words_Engine.List_Package is
                                    Hit    : out Boolean) is
    begin
       Hit := False;
-      if Words_Mode (Show_Age)   or
-        (Trim (Dictionary_Age (De.Tran.Age))'Length /= 0)  --  Not X
+      if Words_Mode (Show_Age)  --  Not X
       then
          Ada.Text_IO.Put (Output, "  " & Trim (Dictionary_Age (De.Tran.Age)));
          Hit := True;
       end if;
-      if (Words_Mode (Show_Frequency) or
-        (De.Tran.Freq >= D))  and
-        (Trim (Dictionary_Frequency (De.Tran.Freq))'Length /= 0)
+      if Words_Mode (Show_Frequency)
       then
          Ada.Text_IO.Put (Output, "  " &
            Trim (Dictionary_Frequency (De.Tran.Freq)));

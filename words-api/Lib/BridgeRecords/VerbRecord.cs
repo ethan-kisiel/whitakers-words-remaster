@@ -10,9 +10,12 @@
 // 
 // Copyright 2025 - 2025 Ethan Kisiel, Ethan Kisiel
 
+using System.Text.Json;
+using words_api.Lib.Enums;
+
 namespace words_api.Lib.BridgeRecords;
 
-public class VerbRecord
+public class VerbRecord: RecordBase
 {
     public string Declension { get; set; }
     public string Tense { get; set; }
@@ -20,4 +23,19 @@ public class VerbRecord
     public string Mood { get; set; }
     public string Person { get; set; }
     public string Number { get; set; }
+
+    public VerbRecord(string wordMatch, string declension, string tense, string voice, string mood, string person, string number): base(wordMatch, PartsOfSpeech.Verb)
+    {
+        Declension = declension;
+        Tense = tense;
+        Voice = voice;
+        Mood = mood;
+        Person = person;
+        Number = number;
+    }
+    
+    public override string ToJson()
+    {
+        return JsonSerializer.Serialize(this);
+    }
 }

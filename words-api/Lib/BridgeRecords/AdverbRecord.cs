@@ -10,10 +10,22 @@
 // 
 // Copyright 2025 - 2025 Ethan Kisiel, Ethan Kisiel
 
+using System.Text.Json;
+using words_api.Lib.Enums;
+
 namespace words_api.Lib.BridgeRecords;
 
-public class Adverb
+public class AdverbRecord: RecordBase
 {
     public string Comparison { get; set; }
 
+    public AdverbRecord(string wordMatch, string comparison): base(wordMatch, PartsOfSpeech.Adverb)
+    {
+        Comparison = comparison;
+    }
+    
+    public override string ToJson()
+    {
+        return JsonSerializer.Serialize(this);
+    }
 }

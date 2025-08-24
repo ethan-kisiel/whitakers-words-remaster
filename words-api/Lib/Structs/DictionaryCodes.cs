@@ -21,7 +21,7 @@ public struct DictionaryCodes
     public char Source { get; set; }
 
 
-    DictionaryCodes(char age, char area, char geo, char frequency, char source)
+    public DictionaryCodes(char age, char area, char geo, char frequency, char source)
     {
         Age = age;
         Area = area;

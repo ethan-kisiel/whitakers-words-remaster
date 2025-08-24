@@ -12,7 +12,7 @@
 
 namespace words_api.Lib.Enums;
 
-public class PartOfSpeech
+public class PartsOfSpeech
 {
     public const string Default = "X";
     public const string Noun = "N";
