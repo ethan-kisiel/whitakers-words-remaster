@@ -22,21 +22,21 @@ public class RecordFactory
         switch (partOfSpeech)
         {
             case PartsOfSpeech.Adjective:
-                return new AdjectiveRecord(wordMatch, wordParams[0], wordParams[1], wordParams[3], wordParams[4], wordParams[5]);
+                return new AdjectiveRecord(wordMatch, wordParams[0], wordParams[2], wordParams[3], wordParams[4], wordParams[5]);
             case PartsOfSpeech.Adverb:
                 return new AdverbRecord(wordMatch, wordParams[0]);
             case PartsOfSpeech.Noun:
-                return new NounRecord(wordMatch, wordParams[0], wordParams[1], wordParams[3], wordParams[4]);
+                return new NounRecord(wordMatch, wordParams[0], wordParams[2], wordParams[3], wordParams[4]);
             case PartsOfSpeech.Number:
-                return new NumeralRecord(wordMatch, wordParams[0], wordParams[1], wordParams[3], wordParams[4], wordParams[5]);
+                return new NumeralRecord(wordMatch, wordParams[0], wordParams[2], wordParams[3], wordParams[4], wordParams[5]);
             case PartsOfSpeech.Pronoun:
-                return new PronounRecord(wordMatch, wordParams[0], wordParams[1], wordParams[3], wordParams[4]);
+                return new PronounRecord(wordMatch, wordParams[0], wordParams[2], wordParams[3], wordParams[4]);
             case PartsOfSpeech.Supine:
-                return new PronounRecord(wordMatch, wordParams[0], wordParams[1], wordParams[3], wordParams[4]);
+                return new PronounRecord(wordMatch, wordParams[0], wordParams[2], wordParams[3], wordParams[4]);
             case PartsOfSpeech.Verb:
                 return new VerbRecord(wordMatch, wordParams[0], wordParams[2], wordParams[3], wordParams[4], wordParams[5], wordParams[6]);
             case PartsOfSpeech.VerbParticiple:
-                return new VerbParticipleRecord(wordMatch, wordParams[0], wordParams[1], wordParams[3], wordParams[4], wordParams[5], wordParams[6], wordParams[7]);
+                return new VerbParticipleRecord(wordMatch, wordParams[0], wordParams[2], wordParams[3], wordParams[4], wordParams[5], wordParams[6], wordParams[7]);
             default:
                 return new DefaultRecord(wordMatch, partOfSpeech);
         }

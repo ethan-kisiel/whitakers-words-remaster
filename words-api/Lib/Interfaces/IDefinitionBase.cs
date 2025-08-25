@@ -14,7 +14,6 @@ namespace words_api.Lib.Interfaces;
 
 public interface IDefinitionBase
 {
-    public string Root { get; set; }
     public string[] Meanings { get; set; }
-    public DictionaryCodes DictionaryCodes { get; set; }
+    public RootLine[] RootLines { get; set; }
 }

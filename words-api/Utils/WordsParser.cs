@@ -24,22 +24,19 @@ public class WordsParser
     {
         var words = Regex.Matches(record, RegexPatterns.CaptureResultGroupsPattern, RegexOptions.Multiline)
             .Select<Match, string>(match => match.Groups[0].Value).ToArray();
-        
-        Console.WriteLine($"PARSED WORDS: {words.Length}");
-        foreach (var word in words)
-        {
-            Console.WriteLine(word);
-        }
 
         return RecordFactory.GetRecord(words[0], words[1], words[2..]);
     }
 
-    private static DictionaryCodes ParseCodes(string rootLine)
+    private static DictionaryCodes ParseCodes(string codeString)
     {
-        var codes = Regex.Match(rootLine, RegexPatterns.CaptureDictionaryCodesPattern).Groups[0].Value;
-        
-        return new DictionaryCodes(codes[0], codes[1], codes[2], codes[3], codes[4]);
+        return new DictionaryCodes(codeString[0], codeString[1], codeString[2], codeString[3], codeString[4]);
     }
+
+    // private static string ParseRoot(string rootline)
+    // {
+    //     
+    // }
 
     // public static EnglishLookup ParseEnglishLookup
     // {
@@ -58,32 +55,67 @@ public class WordsParser
         LatinLookup currentLookup = new LatinLookup();
         
         List<RecordBase> currentRecords = new();
+        List<RootLine> currentRootLines = new();
 
         foreach (var line in input.Split('\n'))
         {
-            var trimmedLine = line.Trim(' ');
-
+            var trimmedLine = line.Trim(' ').Trim('\n');
+            Console.WriteLine(trimmedLine);
+            
             if (Regex.IsMatch(trimmedLine, RegexPatterns.DefinitionPattern)) // we have hit a definition
             {
-                currentLookup.Meanings = trimmedLine.Split(";")
-                    .Where(m => m.Trim(' ') != string.Empty).ToArray();
+                Console.WriteLine("Definition Match");
+                currentLookup.Meanings = Regex.Match(trimmedLine, RegexPatterns.DefinitionPattern).Value.Split(';')
+                    .Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
 
                 currentLookup.RecordMatches = currentRecords.ToArray();
+                currentLookup.RootLines = currentRootLines.ToArray();
+                
                 lookupResults.Add(currentLookup);
                 
                 currentRecords.Clear();
+                currentRootLines.Clear();
+                
                 currentLookup = new LatinLookup();
             }
 
-            if (Regex.IsMatch(trimmedLine, RegexPatterns.WordBaseMatchPattern))
+            if (Regex.IsMatch(trimmedLine, RegexPatterns.WordRootLineMatchPattern))
             {
-                // parse out base parse out codes
-                currentLookup.DictionaryCodes = ParseCodes(trimmedLine);
+                Console.WriteLine("Word Root Match");
+                try
+                {
+                    var rootLineMatch = Regex.Match(trimmedLine, RegexPatterns.CaptureRootLinePattern);
+                    // parse out base parse out codes
+                    var rootLine = new RootLine();
+
+
+
+                    rootLine.Root = rootLineMatch.Groups["roots"].Value;
+                    rootLine.PartOfSpeech = rootLineMatch.Groups["pos"].Value;
+
+                    if (rootLineMatch.Groups["iter"].Success)
+                    {
+                        rootLine.Version = rootLineMatch.Groups["iter"].Value;
+                    }
+
+                    if (rootLineMatch.Groups["gender"].Success)
+                    {
+                        rootLine.Gender = rootLineMatch.Groups["gender"].Value;
+
+                    }
+
+                    rootLine.Codes = ParseCodes(rootLineMatch.Groups["dictCodes"].Value);
+                    currentRootLines.Add(rootLine);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"Soemthing went wrong: {e.Message}");
+                }
             }
             
             if (Regex.IsMatch(trimmedLine, RegexPatterns.RecordMatchPattern))
             {
-                Console.WriteLine($"Parsing record: {ParseRecord(line)}");
+                Console.WriteLine("Record Match");
                 currentRecords.Add(ParseRecord(line));
             }
         }

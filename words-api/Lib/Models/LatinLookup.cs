@@ -17,8 +17,7 @@ namespace words_api.Lib;
 
 public class LatinLookup: LookupBase
 {
-    public string Root { get; set; } = "";
+    public RootLine[] RootLines { get; set; }
     public RecordBase[] RecordMatches { get; set; } = [];
     public string[] Meanings { get; set; } = [];
-    public DictionaryCodes DictionaryCodes { get; set; }
 }

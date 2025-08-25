@@ -21,8 +21,6 @@ namespace words_api.Lib;
 public class LookupBase: IDefinitionBase
 {
     public string SearchQuery { get; set; } = string.Empty;
-    public string PartOfSpeech { get; set; }
-    public string Root { get; set; } = string.Empty;
     public string[] Meanings { get; set; } = [];
-    public DictionaryCodes DictionaryCodes { get; set; }
+    public RootLine[] RootLines { get; set; } = [];
 }

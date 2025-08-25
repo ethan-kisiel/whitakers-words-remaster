@@ -31,7 +31,7 @@ translate.MapGet("/latin/{entry}", (string entry) =>
     }
     catch (Exception ex)
     {
-        Console.WriteLine(ex.Message);
+        Console.WriteLine($"Something is fucked: {ex.Message}");
         return [];
     }
 });

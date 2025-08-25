@@ -48,6 +48,7 @@ public class WordsUtil
             throw new Exception($"Words process failed: {error}");
         }
         
+        Console.WriteLine(output);
         return output;
     }
 }
