@@ -1,0 +1,99 @@
+export class InputFieldWithButton extends HTMLElement {
+    public static htmlName = 'input-field-with-button';
+
+    classStyle = `
+        div.horizontal-align {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+        label { display: inline-block; margin: .4rem 0 .2rem; }
+        input, textarea, select {
+        font: inherit;
+        color: inherit;
+        background: #fff;
+        border: 1px solid var(--rule);
+        border-radius: 6px;
+        padding: .55rem .7rem;
+        width: 100%;
+        transition: background .2s, border-color .2s;
+        }
+        textarea { min-height: 7rem; resize: vertical; }
+        fieldset {
+        border: 1px solid var(--rule);
+        border-radius: 8px;
+        padding: var(--space-3);
+        margin: var(--space-3) 0;
+        }
+        legend {
+        padding: 0 .4rem;
+        font-variant-caps: small-caps;
+        letter-spacing: .02em;
+        }
+
+        button, input[type="submit"], input[type="button"], .btn {
+        font: inherit;
+        display: inline-block;
+        padding: .55rem .9rem;
+        border-radius: 8px;
+        border: 1px solid var(--rule);
+        background: #fff;
+        cursor: pointer;
+        transition: background .2s, border-color .2s, transform .05s;
+        margin: 5px;
+        }
+        button:hover, .btn:hover {
+        background: #f0ebe0;
+        border-color: var(--accent-muted);
+        }
+        button:active, .btn:active { transform: translateY(1px); }
+
+        /* Dark mode refinement */
+        @media (prefers-color-scheme: dark) {
+        :root {
+            --paper: #1f1c19;
+            --paper-deckle: #161411;
+            --ink: #f1ede3;
+            --ink-muted: #cfc7b7;
+            --accent: #86a8ff;
+            --accent-muted: #a9befb;
+            --rule: #3b362f;
+            --line: #2b2723;
+            --code-bg: #27231f;
+        }
+        body { background: linear-gradient(180deg, #1d1a17 0%, #151310 100%); }
+        .book { background: #1a1714; box-shadow: none; outline-color: rgba(255,255,255,.04); }
+        pre { background: #201d19; }
+        input, textarea, select {
+            background: #2a2622;
+            border-color: var(--rule);
+            color: var(--ink);
+        }
+        button, input[type="submit"], input[type="button"], .btn {
+            background: #2a2622;
+            color: var(--ink);
+            border-color: var(--rule);
+        }
+        button:hover, .btn:hover { background: #33302b; border-color: var(--accent-muted); }
+        }
+    `
+
+    constructor() {
+        super();
+        const shadow = this.attachShadow({ mode: 'open' });
+
+        shadow.innerHTML = `
+            <style>
+            ${this.classStyle}
+            </style>
+            <div class="horizontal-align">
+                <input>
+                <button>Search</button>
+            </div>
+        `
+    }
+}
+
+if (!window.customElements.get(InputFieldWithButton.htmlName)) {
+  window.customElements.define(InputFieldWithButton.htmlName, InputFieldWithButton);
+}

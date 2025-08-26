@@ -3,29 +3,27 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Textbook Theme — Elements Preview</title>
+  <title>Whitakers Words Online</title>
   <link rel="stylesheet" href="theme-textbook.css" />
+  <script type="module" src="src/components/latin-search-result.ts"></script>
+  <script type="module" src="src/components/input-field-with-button.ts"></script>
 </head>
 <body class="light-dark">
   <div class="book">
     <header class="book-header">
-      <div>Textbook Theme</div>
+      <div>Whitakers Words Online</div>
       <nav class="nav">
-        <a href="#type">Type</a>
-        <a href="#lists">Lists</a>
-        <a href="#tables">Tables</a>
-        <a href="#media">Media</a>
-        <a href="#forms">Forms</a>
-        <a href="#tooltips">Tooltips</a>
-        <a href="#dictionary">Dictionary</a>
+        <a href="#">Latin Search</a>
+        <a href="#">English Search</a>
       </nav>
     </header>
 
     <main>
-      <h1>Chapter 1 · A Gentle Tour</h1>
-      <p class="lede dropcap">
+      <h1>Latin Search</h1>
+      <input-field-with-button></input-field-with-button>
+      <!-- <p class="lede dropcap">
         This page showcases most HTML elements under a classic, print-inspired theme so you can evaluate the look and feel at a glance.
-      </p>
+      </p> -->
 
       <section id="tooltips">
         <h2>Tooltips</h2>
@@ -59,6 +57,8 @@
 
       <section id="dictionary">
         <h2>Dictionary Entry Example</h2>
+        <latin-search-result></latin-search-result>
+
         <article class="dictionary-entry">
           <h3><em>liber</em>, -bri <abbr title="Masculine">m.</abbr></h3>
           <p>
@@ -69,7 +69,7 @@
             <li><em>in libris</em> — “in books,” used figuratively for learning</li>
           </ul>
           <blockquote>
-            <q>Inter arma silent <em>libri</em>.</q>  
+            <q>Inter arma silent <em>libri</em>.</q>
             <cite>— Proverb</cite>
           </blockquote>
         </article>
@@ -84,7 +84,7 @@
             <li><em>verbum dare</em> — to deceive, “give a word”</li>
           </ul>
           <blockquote>
-            <q><em>Verba volant, scripta manent.</em></q>  
+            <q><em>Verba volant, scripta manent.</em></q>
             <cite>— Latin proverb (“Spoken words fly, written words remain”)</cite>
           </blockquote>
         </article>
@@ -92,8 +92,7 @@
     </main>
 
     <footer class="book-footer">
-      <div>&copy; 2025 Your App</div>
-      <div>Page 1</div>
+      <div>&copy; 2025 Whitakers Words Remastered</div>
     </footer>
   </div>
 </body>

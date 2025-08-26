@@ -146,6 +146,7 @@ pre {
 /* Lists, Tables, Figures unchanged for brevity */
 
 /* Forms */
+
 label { display: inline-block; margin: .4rem 0 .2rem; }
 input, textarea, select {
   font: inherit;
@@ -179,6 +180,7 @@ button, input[type="submit"], input[type="button"], .btn {
   background: #fff;
   cursor: pointer;
   transition: background .2s, border-color .2s, transform .05s;
+  margin: 5px;
 }
 button:hover, .btn:hover {
   background: #f0ebe0;
@@ -213,47 +215,4 @@ button:active, .btn:active { transform: translateY(1px); }
     border-color: var(--rule);
   }
   button:hover, .btn:hover { background: #33302b; border-color: var(--accent-muted); }
-}
-
-/* Dictionary entry styling */
-.dictionary-entry {
-  margin: 2rem 0;
-  padding: 1rem 1.5rem;
-  border-left: 4px solid var(--accent);
-  background-color: color-mix(in srgb, var(--surface) 95%, var(--text) 5%);
-  border-radius: 0.25rem;
-}
-
-.dictionary-entry h3 {
-  font-family: var(--serif);
-  font-size: 1.2rem;
-  font-style: italic;
-  margin-top: 0;
-  margin-bottom: 0.25rem;
-}
-
-.dictionary-entry h3 abbr {
-  font-variant: small-caps;
-  font-style: normal;
-  margin-left: 0.5rem;
-  color: var(--muted);
-}
-
-.dictionary-entry p {
-  margin: 0.25rem 0 0.75rem 0;
-  line-height: 1.5;
-}
-
-.dictionary-entry ul {
-  margin: 0.25rem 0 0.75rem 1.25rem;
-  padding: 0;
-  list-style-type: "– ";
-}
-
-.dictionary-entry blockquote {
-  font-style: italic;
-  margin: 0.5rem 0 0 1rem;
-  padding-left: 1rem;
-  border-left: 2px solid var(--muted);
-  color: var(--muted);
 }

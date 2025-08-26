@@ -65,7 +65,7 @@ public class WordsParser
             if (Regex.IsMatch(trimmedLine, RegexPatterns.DefinitionPattern)) // we have hit a definition
             {
                 Console.WriteLine("Definition Match");
-                currentLookup.Meanings = Regex.Match(trimmedLine, RegexPatterns.DefinitionPattern).Value.Split(';')
+                currentLookup.Meanings = trimmedLine.Split(';')
                     .Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
 
                 currentLookup.RecordMatches = currentRecords.ToArray();
@@ -89,7 +89,8 @@ public class WordsParser
                     var rootLine = new RootLine();
 
 
-
+                    // TODO: make everything optional except for the codes
+                    // this will require modifying both the rootline object and the regex.
                     rootLine.Root = rootLineMatch.Groups["roots"].Value;
                     rootLine.PartOfSpeech = rootLineMatch.Groups["pos"].Value;
 
