@@ -33,17 +33,18 @@ export class InputFieldWithButton extends HTMLElement {
         font-variant-caps: small-caps;
         letter-spacing: .02em;
         }
-
+        button, input {
+        margin: 2.5px;
+        }
         button, input[type="submit"], input[type="button"], .btn {
         font: inherit;
         display: inline-block;
-        padding: .55rem .9rem;
+        padding: .55rem .7rem;
         border-radius: 8px;
         border: 1px solid var(--rule);
         background: #fff;
         cursor: pointer;
         transition: background .2s, border-color .2s, transform .05s;
-        margin: 5px;
         }
         button:hover, .btn:hover {
         background: #f0ebe0;
@@ -78,6 +79,12 @@ export class InputFieldWithButton extends HTMLElement {
             border-color: var(--rule);
         }
         button:hover, .btn:hover { background: #33302b; border-color: var(--accent-muted); }
+        }
+        hr {
+            height: 1px;
+            border: 0;
+            background: linear-gradient(90deg, transparent, var(--rule), transparent);
+            margin: var(--space-5) 0;
         }
     `
 

@@ -2,6 +2,7 @@
 export class LatinSearchResult extends HTMLElement {
   public static htmlName = 'latin-search-result';
   classStyle = `
+
       /* Dictionary entry styling */
     .dictionary-entry {
       margin: 2rem 0;
@@ -46,6 +47,8 @@ export class LatinSearchResult extends HTMLElement {
     }
 
 
+  small, figcaption, caption { font-size: var(--small); color: var(--ink-muted); }
+
     /* Dark mode refinement */
     @media (prefers-color-scheme: dark) {
       :root {
@@ -67,27 +70,33 @@ export class LatinSearchResult extends HTMLElement {
   constructor() {
     super();
     const shadow = this.attachShadow({ mode: 'open' });
+  }
 
-    shadow.innerHTML = `
-        <style>
-        ${this.classStyle}
-        </style>
+  connectedCallback() {
+    this.shadowRoot!.innerHTML = `
+      <style>
+      ${this.classStyle}
+      </style>
 
-        <article class="dictionary-entry">
-          <h3><em>balls</em> <abbr title="Masculine">m.</abbr></h3>
-          <p>
-            <strong>Meanings:</strong> something, something else
-          </p>
-          <ul>
-            <li><em>libri</em> — books, works of literature</li>
-            <li><em>in libris</em> — “in books,” used figuratively for learning</li>
-          </ul>
-          <blockquote>
-            <q>Inter arma silent <em>libri</em>.</q>
-            <cite>— Proverb</cite>
-          </blockquote>
-        </article>
-        `
+      <article class="dictionary-entry">
+        <h3><em>bbos, bovis</em> <abbr title="Masculine">m.</abbr>, Noun</h3>
+        <p>
+          <strong>Meanings:</strong> ox; bull cow; ox-ray; cattle (pl.); (ox-like animals); [luca ~ =\u003E elephant].
+        </p>
+
+        <small>
+        <ul>
+          <li><em>Age:</em> example of age</li>
+          <li><em>Source:</em> example of source</li>
+          <li><em>Frequency:</em> example of frequency</li>
+          <li><em>Area:</em> example of area</li>
+          <li><em>Geographic Origin:</em> example of geographic origin</li>
+        </ul>
+        </small>
+
+        <span class="icon">▼</span><span class="icon">▲</span>
+      </article>
+      `
   }
 }
 
