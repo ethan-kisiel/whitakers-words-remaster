@@ -66,6 +66,7 @@ export class LatinSearchResult extends HTMLElement {
       .book { background: #1a1714; box-shadow: none; outline-color: rgba(255,255,255,.04); }
       pre { background: #201d19; }
     }
+}
   `
   constructor() {
     super();
@@ -74,30 +75,73 @@ export class LatinSearchResult extends HTMLElement {
 
   connectedCallback() {
     this.shadowRoot!.innerHTML = `
+      <link rel="stylesheet" href="src/style.css" />
       <style>
       ${this.classStyle}
       </style>
 
+      <view-selector id='viewSelector' views-count='3'></view-selector>
       <article class="dictionary-entry">
-        <h3><em>bbos, bovis</em> <abbr title="Masculine">m.</abbr>, Noun</h3>
-        <p>
-          <strong>Meanings:</strong> ox; bull cow; ox-ray; cattle (pl.); (ox-like animals); [luca ~ =\u003E elephant].
-        </p>
+      <div id="views">
+        <div>
+          <h3><em>bos, bovis</em> <abbr title="Masculine">m.</abbr>, Noun</h3>
+          <p>
+            <strong>Meanings:</strong> ox; bull cow; ox-ray; cattle (pl.); (ox-like animals); [luca ~ =\u003E elephant].
+          </p>
+        </div>
 
-        <small>
-        <ul>
-          <li><em>Age:</em> example of age</li>
-          <li><em>Source:</em> example of source</li>
-          <li><em>Frequency:</em> example of frequency</li>
-          <li><em>Area:</em> example of area</li>
-          <li><em>Geographic Origin:</em> example of geographic origin</li>
-        </ul>
-        </small>
+        <div>
+         <ul>
+            <li><em>Age:</em> example of age</li>
+            <li><em>Source:</em> example of source</li>
+            <li><em>Frequency:</em> example of frequency</li>
+            <li><em>Area:</em> example of area</li>
+            <li><em>Geographic Origin:</em> example of geographic origin</li>
+          </ul>
+        </div>
 
-        <span class="icon">▼</span><span class="icon">▲</span>
+      <div>
+          <small>
+          <ul>
+            <li><em>Age:</em> example of age</li>
+            <li><em>Source:</em> example of source</li>
+            <li><em>Frequency:</em> example of frequency</li>
+            <li><em>Area:</em> example of area</li>
+            <li><em>Geographic Origin:</em> example of geographic origin</li>
+          </ul>
+          </small>
+      </div>
       </article>
-      `
+      `;
+
+
+      this.clearViews();
+      this.showView(0);
+      const viewSelector = this.shadowRoot?.querySelector('#viewSelector') as HTMLElement;
+
+      viewSelector.addEventListener('viewSelected', (event) => {
+        const viewDiv = this.shadowRoot?.querySelector('#views') as HTMLDivElement;
+        const viewsCount = viewDiv.children.length;
+        const viewIndex = (event as CustomEvent).detail.index % viewsCount;
+
+        this.clearViews();
+        this.showView(viewIndex);
+      });
   }
+  showView(index: number) {
+    const viewDiv = this.shadowRoot?.querySelector('#views') as HTMLDivElement;
+
+   (viewDiv.children[index] as HTMLElement).style.display = 'block';
+  }
+
+  clearViews(){
+    const viewDiv = this.shadowRoot?.querySelector('#views') as HTMLDivElement;
+
+    for (const child of viewDiv.children) {
+      (child as HTMLElement).style.display = 'none';
+    }
+  }
+
 }
 
 if (!window.customElements.get(LatinSearchResult.htmlName)) {
