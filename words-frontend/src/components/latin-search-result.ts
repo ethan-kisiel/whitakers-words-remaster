@@ -74,20 +74,65 @@ export class LatinSearchResult extends HTMLElement {
   }
 
   connectedCallback() {
+    const popupExample = `
+            Age: example of age\n
+            Source: example of source\n
+            Frequency: example of frequency\n
+            Area: example of area\n
+            Geographic Origin: example of geographic origin
+    `
     this.shadowRoot!.innerHTML = `
       <link rel="stylesheet" href="src/style.css" />
       <style>
       ${this.classStyle}
       </style>
 
-      <view-selector id='viewSelector' views-count='3'></view-selector>
+
       <article class="dictionary-entry">
+      <view-selector id="viewSelector" views-count='3'></view-selector>
       <div id="views">
         <div>
           <h3><em>bos, bovis</em> <abbr title="Masculine">m.</abbr>, Noun</h3>
           <p>
             <strong>Meanings:</strong> ox; bull cow; ox-ray; cattle (pl.); (ox-like animals); [luca ~ =\u003E elephant].
+
+            <span class="tooltip" data-tooltip="${popupExample}">ⓘ</span>
           </p>
+          <small>
+          <ul>
+            <li><em>Age:</em> example of age</li>
+            <li><em>Source:</em> example of source</li>
+            <li><em>Frequency:</em> example of frequency</li>
+            <li><em>Area:</em> example of area</li>
+            <li><em>Geographic Origin:</em> example of geographic origin</li>
+          </ul>
+          </small>
+                <h3><em>bos, bovis</em> <abbr title="Masculine">m.</abbr>, Noun</h3>
+          <p>
+            <strong>Meanings:</strong> ox; bull cow; ox-ray; cattle (pl.); (ox-like animals); [luca ~ =\u003E elephant].
+          </p>
+          <small>
+          <ul>
+            <li><em>Age:</em> example of age</li>
+            <li><em>Source:</em> example of source</li>
+            <li><em>Frequency:</em> example of frequency</li>
+            <li><em>Area:</em> example of area</li>
+            <li><em>Geographic Origin:</em> example of geographic origin</li>
+          </ul>
+          </small>
+            <h3><em>bos, bovis</em> <abbr title="Masculine">m.</abbr>, Noun</h3>
+          <p>
+            <strong>Meanings:</strong> ox; bull cow; ox-ray; cattle (pl.); (ox-like animals); [luca ~ =\u003E elephant].
+          </p>
+          <small>
+          <ul>
+            <li><em>Age:</em> example of age</li>
+            <li><em>Source:</em> example of source</li>
+            <li><em>Frequency:</em> example of frequency</li>
+            <li><em>Area:</em> example of area</li>
+            <li><em>Geographic Origin:</em> example of geographic origin</li>
+          </ul>
+          </small>
         </div>
 
         <div>
@@ -101,17 +146,9 @@ export class LatinSearchResult extends HTMLElement {
         </div>
 
       <div>
-          <small>
-          <ul>
-            <li><em>Age:</em> example of age</li>
-            <li><em>Source:</em> example of source</li>
-            <li><em>Frequency:</em> example of frequency</li>
-            <li><em>Area:</em> example of area</li>
-            <li><em>Geographic Origin:</em> example of geographic origin</li>
-          </ul>
-          </small>
       </div>
       </article>
+      <hr>
       `;
 
 

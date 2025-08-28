@@ -1,5 +1,5 @@
 import WordsHttpClient from "../utils/WordsHttpClient";
-import { InputFieldWithButton } from "./input-field-with-button";
+import { InputFieldWithButton } from "../components/input-field-with-button";
 
 let searchType: "LATIN" | "ENGLISH";
 

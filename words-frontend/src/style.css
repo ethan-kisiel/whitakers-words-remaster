@@ -216,3 +216,56 @@ button:active, .btn:active { transform: translateY(1px); }
   }
   button:hover, .btn:hover { background: #33302b; border-color: var(--accent-muted); }
 }
+
+
+/* =====================================================================
+   Tooltips
+   ===================================================================== */
+.tooltip {
+  position: relative;
+  cursor: help;
+  color: var(--accent);
+  text-decoration: underline dotted;
+}
+
+.tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 125%; /* above the element */
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--sans);
+  font-size: var(--micro);
+  line-height: 1.4;
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.25);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 20;
+  white-space: pre;
+}
+
+.tooltip:hover::after {
+  opacity: 1;
+}
+
+.tooltip::before {
+  content: "";
+  position: absolute;
+  bottom: 115%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: var(--ink);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 19;
+}
+
+.tooltip:hover::before {
+  opacity: 1;
+}
