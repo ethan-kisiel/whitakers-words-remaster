@@ -26,7 +26,7 @@ export class Frequency {
             case this.frequent:
                 return (!detailed?
                     'Frequent' :
-                    'Frequent, next 2000+ words');
+                    'Frequent, in top 2000-3000+ words');
             case this.common:
                 return (!detailed?
                     'Common' :

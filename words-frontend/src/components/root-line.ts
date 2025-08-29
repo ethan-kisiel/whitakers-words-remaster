@@ -61,7 +61,7 @@ Geographic Origin: ${Region.getLongForm(this.region)}`;
 
         const rootsHtml = this.roots ? `
         <h3>
-            <em>${this.roots}</em> &emsp;
+            &emsp; <em>${this.roots}</em> &emsp;
         </h3>
         ` : '';
 
@@ -79,14 +79,14 @@ Geographic Origin: ${Region.getLongForm(this.region)}`;
 
         const version = this.version ? `
         <h3>
-            ${this.version} &emsp;
+            ${this.version} ${this.pos === 'N' || this.pos === 'PRON' || this.pos === 'ADJ' ? 'Declension' : 'Conjugation'} &emsp;
         </h3>
         ` : '';
 
         this.innerHTML = `
         <div class='one-line'>
-        ${rootsHtml} ${genderHtml} ${posHtml}
         <span class="tooltip" data-tooltip="${dictDataHtml}">ⓘ</span>
+        ${rootsHtml} ${genderHtml} ${version} ${posHtml}
         </div>
         `;
     }
