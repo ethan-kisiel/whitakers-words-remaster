@@ -4,10 +4,12 @@ import { Frequency, type FrequencyValue } from "../lib/models/codes/Frequency";
 import { Region, type RegionValue } from "../lib/models/codes/Region";
 import { Source, type SourceValue } from "../lib/models/codes/Source";
 import { Gender, type GenderValue } from "../lib/models/Gender";
+import { PartsOfSpeech, type PartsOfSpeechValue } from "../lib/models/PartOfSpeech";
+import type { PronounKindValue } from "../lib/models/PronounKind";
 
 export class RootLine extends HTMLElement {
     public static htmlName = 'root-line';
-    public static observedAttributes = ['age', 'domain', 'frequency', 'region', 'source', 'roots', 'meanings', 'pos', 'gender', 'version'];
+    public static observedAttributes = ['line', 'age', 'domain', 'frequency', 'region', 'source', 'roots', 'meanings', 'pos', 'gender', 'kind', 'version'];
 
     private declare age: AgeValue;
     private declare domain: DomainValue;
@@ -16,9 +18,9 @@ export class RootLine extends HTMLElement {
     private declare source: SourceValue;
 
     private roots?: string;
-    private meanings?: string;
-    private pos?: string;
+    private pos?: PartsOfSpeechValue;
     private gender?: GenderValue;
+    private kind?: PronounKindValue;
     private version?: string;
 
     constructor() {
@@ -26,7 +28,22 @@ export class RootLine extends HTMLElement {
     }
 
     attributeChangedCallback(name: string, _: unknown, newValue: string) {
-        console.log(`${name}: ${newValue}`);
+        if (name === 'line') {
+            const parsedRootLine = JSON.parse(newValue);
+
+            this.age = parsedRootLine.codes.age;
+            this.domain = parsedRootLine.codes.area;
+            this.frequency = parsedRootLine.codes.frequency;
+            this.region = parsedRootLine.codes.geo;
+            this.source = parsedRootLine.codes.source;
+
+            this.roots = parsedRootLine.root;
+            this.pos = parsedRootLine.partOfSpeech;
+            this.gender = parsedRootLine.gender;
+            this.kind = parsedRootLine.kind;
+            this.version = parsedRootLine.version;
+        }
+
         (this as Record<string, unknown>)[name] = newValue;
     }
 
@@ -42,33 +59,27 @@ Domain: ${Domain.getLongForm(this.domain, true)}
 
 Geographic Origin: ${Region.getLongForm(this.region)}`;
 
-        const rootsHtml = this.roots !== undefined ? `
+        const rootsHtml = this.roots ? `
         <h3>
-            <em>${this.roots}</em>
+            <em>${this.roots}</em> &emsp;
         </h3>
         ` : '';
 
-        const meaningsHtml = this.meanings !== undefined ? `
-        <p>
-            <strong>Meanings:</strong> ${this.meanings}.
-        </p>
-        ` : '';
-
-        const posHtml = this.pos !== undefined ? `
+        const posHtml = this.pos ? `
         <h3>
-        ${this.pos}
+        ${PartsOfSpeech.getLongForm(this.pos)} &emsp;
         </h3>
         ` : '';
 
-        const genderHtml = this.gender !== undefined ? `
+        const genderHtml = this.gender ? `
         <h3>
-            <span class="tooltip" data-tooltip="${Gender.getLongForm(this.gender)}">${this.gender}.</span>
+            <span class="tooltip" data-tooltip="${Gender.getLongForm(this.gender)}">${this.gender}.</span> &emsp;
         </h3>
         ` : '';
 
-        const version = this.version !== undefined ? `
+        const version = this.version ? `
         <h3>
-            ${this.version}
+            ${this.version} &emsp;
         </h3>
         ` : '';
 
@@ -77,7 +88,6 @@ Geographic Origin: ${Region.getLongForm(this.region)}`;
         ${rootsHtml} ${genderHtml} ${posHtml}
         <span class="tooltip" data-tooltip="${dictDataHtml}">ⓘ</span>
         </div>
-        ${meaningsHtml}
         `;
     }
 }

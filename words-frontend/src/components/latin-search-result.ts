@@ -1,103 +1,45 @@
 
 export class LatinSearchResult extends HTMLElement {
+  public static observedAttributes = ['search-result'];
   public static htmlName = 'latin-search-result';
-  classStyle = `
 
-      /* Dictionary entry styling */
-    .dictionary-entry {
-      margin: 2rem 0;
-      padding: 1rem 1.5rem;
-      border-left: 4px solid var(--accent);
-      background-color: color-mix(in srgb, var(--surface) 95%, var(--text) 5%);
-      border-radius: 0.25rem;
-    }
+  public declare searchResult: Record<string, unknown>;
 
-    .dictionary-entry h3 {
-      font-family: var(--serif);
-      font-size: 1.2rem;
-      font-style: italic;
-      margin-top: 0;
-      margin-bottom: 0.25rem;
-    }
-
-    .dictionary-entry h3 abbr {
-      font-variant: small-caps;
-      font-style: normal;
-      margin-left: 0.5rem;
-      color: var(--muted);
-    }
-
-    .dictionary-entry p {
-      margin: 0.25rem 0 0.75rem 0;
-      line-height: 1.5;
-    }
-
-    .dictionary-entry ul {
-      margin: 0.25rem 0 0.75rem 1.25rem;
-      padding: 0;
-      list-style-type: "";
-    }
-
-    .dictionary-entry blockquote {
-      font-style: italic;
-      margin: 0.5rem 0 0 1rem;
-      padding-left: 1rem;
-      border-left: 2px solid var(--muted);
-      color: var(--muted);
-    }
-
-
-  small, figcaption, caption { font-size: var(--small); color: var(--ink-muted); }
-
-      /* Dark mode refinement */
-      @media (prefers-color-scheme: dark) {
-        :root {
-          --paper: #1f1c19;
-          --paper-deckle: #161411;
-          --ink: #f1ede3;
-          --ink-muted: #cfc7b7;
-          --accent: #86a8ff;
-          --accent-muted: #a9befb;
-          --rule: #3b362f;
-          --line: #2b2723;
-          --code-bg: #27231f;
-        }
-        body { background: linear-gradient(180deg, #1d1a17 0%, #151310 100%); }
-        .book { background: #1a1714; box-shadow: none; outline-color: rgba(255,255,255,.04); }
-        pre { background: #201d19; }
-      }
-
-    .one-line {
-      display: flex;
-    }
-  `
   constructor() {
     super();
-    const shadow = this.attachShadow({ mode: 'open' });
+    this.attachShadow({ mode: 'open' });
+  }
+
+  attributeChangedCallback(name: string, _: unknown, newValue: string) {
+      if (name === 'search-result') {
+          this.searchResult = JSON.parse(newValue);
+          console.log(newValue);
+      }
   }
 
   connectedCallback() {
     this.shadowRoot!.innerHTML = `
       <link rel="stylesheet" href="src/style.css" />
-      <style>
-      ${this.classStyle}
-      </style>
-
 
       <article class="dictionary-entry">
-      <view-selector id="viewSelector" views-count='1'></view-selector>
+      <view-selector id="viewSelector" views-count='3'></view-selector>
       <div id="views">
+        <div id="roots">
+        </div>
+
         <div>
-        <root-line roots='root, root, root' age='X' domain='X' frequency='X' region='D' region='O' source='R' meanings='meaning, meaning, meaning'></root-line>
-        <root-line roots='root, root, root' age='X' domain='X' frequency='X' region='D' region='O' source='R' meanings='meaning, meaning, meaning'></root-line>
-        <root-line roots='root, root, root' age='X' domain='X' frequency='X' region='D' region='O' source='R' meanings='meaning, meaning, meaning'></root-line>
-        <root-line roots='root, root, root' age='X' domain='X' frequency='X' region='D' region='O' source='R' meanings='meaning, meaning, meaning'></root-line>
+        view 2
+        </div>
+
+        <div>
+        view 3
         </div>
       </div>
       </article>
       <hr>
       `;
 
+      this.generateRootLines();
 
       this.clearViews();
       this.showView(0);
@@ -124,6 +66,25 @@ export class LatinSearchResult extends HTMLElement {
     for (const child of viewDiv.children) {
       (child as HTMLElement).style.display = 'none';
     }
+  }
+
+
+  generateRootLines() {
+    const rootsDiv = this.shadowRoot?.querySelector('#roots') as HTMLDivElement;
+    for (const line of this.searchResult.rootLines as []) {
+      const newRoot = document.createElement('root-line');
+      newRoot.setAttribute('line', JSON.stringify(line));
+
+      rootsDiv.appendChild(newRoot);
+    }
+
+    const meaningsHtml = this.searchResult.meanings ? `
+    <p>
+        <strong>Meanings:</strong> ${(this.searchResult.meanings as []).join(';')}. &emsp;
+    </p>
+    ` : '';
+
+    rootsDiv.innerHTML += meaningsHtml;
   }
 
 }

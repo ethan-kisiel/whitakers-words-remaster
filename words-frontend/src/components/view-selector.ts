@@ -44,7 +44,7 @@ export class ViewSelector extends HTMLElement {
         `;
     }
 
-    attributeChangedCallback(name: string, oldValue: unknown, newValue: string) {
+    attributeChangedCallback(name: string, _: unknown, newValue: string) {
         if (name === 'views-count') {
             this.viewsCount = parseInt(newValue);
         }

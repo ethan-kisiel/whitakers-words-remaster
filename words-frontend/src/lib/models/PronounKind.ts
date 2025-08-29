@@ -47,7 +47,7 @@ export class PronounKind {
                     'Adjectival' :
                     'Adjectival pronoun');
             default:
-                throw new Error('Failed to match pronoun kind value');
+                return '';
         }
     }
 }

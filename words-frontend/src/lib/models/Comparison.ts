@@ -26,7 +26,7 @@ export class Comparison {
                     'Superlative' :
                     'Superlative degree');
             default:
-                throw new Error('Failed to match comparison value');
+                return '';
         }
     }
 }

@@ -28,11 +28,7 @@ export class InputFieldWithButton extends HTMLElement {
         padding: var(--space-3);
         margin: var(--space-3) 0;
         }
-        legend {
-        padding: 0 .4rem;
-        font-variant-caps: small-caps;
-        letter-spacing: .02em;
-        }
+
         button, input {
         margin: 2.5px;
         }
@@ -46,27 +42,13 @@ export class InputFieldWithButton extends HTMLElement {
         cursor: pointer;
         transition: background .2s, border-color .2s, transform .05s;
         }
+
         button:hover, .btn:hover {
         background: #f0ebe0;
         border-color: var(--accent-muted);
         }
         button:active, .btn:active { transform: translateY(1px); }
 
-        /* Dark mode refinement */
-        @media (prefers-color-scheme: dark) {
-        :root {
-            --paper: #1f1c19;
-            --paper-deckle: #161411;
-            --ink: #f1ede3;
-            --ink-muted: #cfc7b7;
-            --accent: #86a8ff;
-            --accent-muted: #a9befb;
-            --rule: #3b362f;
-            --line: #2b2723;
-            --code-bg: #27231f;
-        }
-        body { background: linear-gradient(180deg, #1d1a17 0%, #151310 100%); }
-        .book { background: #1a1714; box-shadow: none; outline-color: rgba(255,255,255,.04); }
         pre { background: #201d19; }
         input, textarea, select {
             background: #2a2622;
@@ -79,13 +61,6 @@ export class InputFieldWithButton extends HTMLElement {
             border-color: var(--rule);
         }
         button:hover, .btn:hover { background: #33302b; border-color: var(--accent-muted); }
-        }
-        hr {
-            height: 1px;
-            border: 0;
-            background: linear-gradient(90deg, transparent, var(--rule), transparent);
-            margin: var(--space-5) 0;
-        }
     `
 
     constructor() {

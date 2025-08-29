@@ -56,7 +56,7 @@ export class NounKind {
                     'Place Where' :
                     'A place where');
             default:
-                throw new Error('Failed to match noun kind value');
+                return '';
         }
     }
 }

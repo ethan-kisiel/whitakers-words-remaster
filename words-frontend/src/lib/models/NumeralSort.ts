@@ -31,7 +31,7 @@ export class NumeralSort {
                     'Adverb' :
                     'Adverbial numeral');
             default:
-                throw new Error('Failed to match numeral sort value');
+                return '';
         }
     }
 }

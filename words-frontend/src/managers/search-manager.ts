@@ -11,6 +11,14 @@ searchResult?.addEventListener(InputFieldWithButton.submittedEventName, handleIn
 async function handleInputEvent(event: unknown) {
     const result = (await WordsHttpClient.shared
         .getTranslation(searchType, (event as CustomEvent).detail.value));
-    console.log(result);
+
+        const dictionarySection = document.querySelector('#dictionary') as HTMLDivElement;
+
+        for (const res of result) {
+            const element = document.createElement('latin-search-result');
+            element.setAttribute('search-result', JSON.stringify(res));
+
+            dictionarySection.appendChild(element);
+        }
 }
 

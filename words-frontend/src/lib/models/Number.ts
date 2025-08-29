@@ -21,7 +21,7 @@ export class Number {
                     'Plural' :
                     'Plural number');
             default:
-                throw new Error('Failed to match number value');
+                return '';
         }
     }
 }

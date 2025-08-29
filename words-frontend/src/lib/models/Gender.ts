@@ -31,7 +31,7 @@ export class Gender {
                     'Common' :
                     'Common gender (masculine or feminine)');
             default:
-                throw new Error('Failed to match gender value');
+                return '';
         }
     }
 }

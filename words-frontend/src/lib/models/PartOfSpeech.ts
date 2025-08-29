@@ -88,7 +88,7 @@ export class PartsOfSpeech {
                     'Suffix' :
                     'Suffix');
             default:
-                throw new Error('Failed to match parts of speech value');
+                return '';
         }
     }
 }
