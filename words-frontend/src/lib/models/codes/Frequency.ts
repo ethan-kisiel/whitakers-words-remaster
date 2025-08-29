@@ -56,7 +56,7 @@ export class Frequency {
                     'Pliny' :
                     'Things that appear only in Pliny Natural History');
             default:
-                throw new Error('Failed to match frequency value');
+                return '';
         }
     }
 }

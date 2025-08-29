@@ -22,7 +22,10 @@ public class RegexPatterns
     public const string CaptureDictionaryCodesPattern = @"\[([A-Z]{5})]$";
 
     public const string CaptureRootLinePattern =
-        @"^(?<roots>\S+(?:[,\s*]\S+)*)\s+(?<pos>[A-Z]+)(?:\s+(?<iter>\([^)]*\)))?(?:\s+(?<gender>[MFNC]))?\s+\[(?<dictCodes>[A-Z]{5})\]$";
+        @"^(?:(?<roots>\S+(?:[,\s*]\S+)*))?(?:\s+(?<pos>[A-Z]+))?(?:\s+(?<iter>\([^)]*\)))?(?:\s+(?:(?<gender>(?=(?:N|ADJ)\b)[MFNC])|(?<kind>(?!(?:N|ADJ)\b)(?:\S+(?:\s+\S+)?))))?(\s?)+\[(?<dictCodes>[A-Z]{5})\]$";
+        
+    
+    //@"^(?<roots>\S+(?:[,\s*]\S+)*)\s+(?<pos>[A-Z]+)(?:\s+(?<iter>\([^)]*\)))?(?:\s+(?<gender>[MFNC]))?\s+\[(?<dictCodes>[A-Z]{5})\]$";
 
     public const string CaptureResultGroupsPattern = @"(\S+)"; // capture all the characters from the record
 }

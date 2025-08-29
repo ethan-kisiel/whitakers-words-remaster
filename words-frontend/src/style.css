@@ -222,7 +222,7 @@ button:active, .btn:active { transform: translateY(1px); }
    Tooltips
    ===================================================================== */
 .tooltip {
-  position: relative;
+  position: static;
   cursor: help;
   color: var(--accent);
   text-decoration: underline dotted;
@@ -230,8 +230,8 @@ button:active, .btn:active { transform: translateY(1px); }
 
 .tooltip::after {
   content: attr(data-tooltip);
-  position: absolute;
-  bottom: 125%; /* above the element */
+  position: fixed;
+  bottom: 20%; /* above the element */
   left: 50%;
   transform: translateX(-50%);
   background: var(--ink);
@@ -245,8 +245,16 @@ button:active, .btn:active { transform: translateY(1px); }
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s ease;
+  max-width: 65vw;
+  width: max-content;
   z-index: 20;
-  white-space: pre;
+  white-space: pre-wrap;
+
+  font-weight: 600;
+  line-height: 1.25;
+  margin: var(--space-5) 0 var(--space-2);
+  font-variant-caps: titling-caps;
+  letter-spacing: .02em;
 }
 
 .tooltip:hover::after {

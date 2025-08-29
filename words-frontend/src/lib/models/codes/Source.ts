@@ -133,7 +133,7 @@ export class Source {
                     'User' :
                     'Sent by user — no dictionary reference');
             default:
-                throw new Error('Failed to match source value');
+                return '';
         }
     }
 }

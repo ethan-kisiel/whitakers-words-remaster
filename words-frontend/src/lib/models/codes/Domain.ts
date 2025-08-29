@@ -66,7 +66,7 @@ export class Domain {
                     'Mythology' :
                     'Mythology');
             default:
-                throw new Error('Failed to match domain value');
+                return '';
         }
     }
 }

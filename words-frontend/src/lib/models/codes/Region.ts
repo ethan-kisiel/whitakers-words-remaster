@@ -98,7 +98,7 @@ export class Region {
                     'Eastern Europe' :
                     'Eastern Europe');
             default:
-                throw new Error('Failed to match region value');
+                return '';
         }
     }
 }

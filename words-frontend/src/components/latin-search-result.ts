@@ -35,7 +35,7 @@ export class LatinSearchResult extends HTMLElement {
     .dictionary-entry ul {
       margin: 0.25rem 0 0.75rem 1.25rem;
       padding: 0;
-      list-style-type: "– ";
+      list-style-type: "";
     }
 
     .dictionary-entry blockquote {
@@ -49,24 +49,27 @@ export class LatinSearchResult extends HTMLElement {
 
   small, figcaption, caption { font-size: var(--small); color: var(--ink-muted); }
 
-    /* Dark mode refinement */
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --paper: #1f1c19;
-        --paper-deckle: #161411;
-        --ink: #f1ede3;
-        --ink-muted: #cfc7b7;
-        --accent: #86a8ff;
-        --accent-muted: #a9befb;
-        --rule: #3b362f;
-        --line: #2b2723;
-        --code-bg: #27231f;
+      /* Dark mode refinement */
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --paper: #1f1c19;
+          --paper-deckle: #161411;
+          --ink: #f1ede3;
+          --ink-muted: #cfc7b7;
+          --accent: #86a8ff;
+          --accent-muted: #a9befb;
+          --rule: #3b362f;
+          --line: #2b2723;
+          --code-bg: #27231f;
+        }
+        body { background: linear-gradient(180deg, #1d1a17 0%, #151310 100%); }
+        .book { background: #1a1714; box-shadow: none; outline-color: rgba(255,255,255,.04); }
+        pre { background: #201d19; }
       }
-      body { background: linear-gradient(180deg, #1d1a17 0%, #151310 100%); }
-      .book { background: #1a1714; box-shadow: none; outline-color: rgba(255,255,255,.04); }
-      pre { background: #201d19; }
+
+    .one-line {
+      display: flex;
     }
-}
   `
   constructor() {
     super();
@@ -74,13 +77,6 @@ export class LatinSearchResult extends HTMLElement {
   }
 
   connectedCallback() {
-    const popupExample = `
-            Age: example of age\n
-            Source: example of source\n
-            Frequency: example of frequency\n
-            Area: example of area\n
-            Geographic Origin: example of geographic origin
-    `
     this.shadowRoot!.innerHTML = `
       <link rel="stylesheet" href="src/style.css" />
       <style>
@@ -89,63 +85,14 @@ export class LatinSearchResult extends HTMLElement {
 
 
       <article class="dictionary-entry">
-      <view-selector id="viewSelector" views-count='3'></view-selector>
+      <view-selector id="viewSelector" views-count='1'></view-selector>
       <div id="views">
         <div>
-          <h3><em>bos, bovis</em> <abbr title="Masculine">m.</abbr>, Noun</h3>
-          <p>
-            <strong>Meanings:</strong> ox; bull cow; ox-ray; cattle (pl.); (ox-like animals); [luca ~ =\u003E elephant].
-
-            <span class="tooltip" data-tooltip="${popupExample}">ⓘ</span>
-          </p>
-          <small>
-          <ul>
-            <li><em>Age:</em> example of age</li>
-            <li><em>Source:</em> example of source</li>
-            <li><em>Frequency:</em> example of frequency</li>
-            <li><em>Area:</em> example of area</li>
-            <li><em>Geographic Origin:</em> example of geographic origin</li>
-          </ul>
-          </small>
-                <h3><em>bos, bovis</em> <abbr title="Masculine">m.</abbr>, Noun</h3>
-          <p>
-            <strong>Meanings:</strong> ox; bull cow; ox-ray; cattle (pl.); (ox-like animals); [luca ~ =\u003E elephant].
-          </p>
-          <small>
-          <ul>
-            <li><em>Age:</em> example of age</li>
-            <li><em>Source:</em> example of source</li>
-            <li><em>Frequency:</em> example of frequency</li>
-            <li><em>Area:</em> example of area</li>
-            <li><em>Geographic Origin:</em> example of geographic origin</li>
-          </ul>
-          </small>
-            <h3><em>bos, bovis</em> <abbr title="Masculine">m.</abbr>, Noun</h3>
-          <p>
-            <strong>Meanings:</strong> ox; bull cow; ox-ray; cattle (pl.); (ox-like animals); [luca ~ =\u003E elephant].
-          </p>
-          <small>
-          <ul>
-            <li><em>Age:</em> example of age</li>
-            <li><em>Source:</em> example of source</li>
-            <li><em>Frequency:</em> example of frequency</li>
-            <li><em>Area:</em> example of area</li>
-            <li><em>Geographic Origin:</em> example of geographic origin</li>
-          </ul>
-          </small>
+        <root-line roots='root, root, root' age='X' domain='X' frequency='X' region='D' region='O' source='R' meanings='meaning, meaning, meaning'></root-line>
+        <root-line roots='root, root, root' age='X' domain='X' frequency='X' region='D' region='O' source='R' meanings='meaning, meaning, meaning'></root-line>
+        <root-line roots='root, root, root' age='X' domain='X' frequency='X' region='D' region='O' source='R' meanings='meaning, meaning, meaning'></root-line>
+        <root-line roots='root, root, root' age='X' domain='X' frequency='X' region='D' region='O' source='R' meanings='meaning, meaning, meaning'></root-line>
         </div>
-
-        <div>
-         <ul>
-            <li><em>Age:</em> example of age</li>
-            <li><em>Source:</em> example of source</li>
-            <li><em>Frequency:</em> example of frequency</li>
-            <li><em>Area:</em> example of area</li>
-            <li><em>Geographic Origin:</em> example of geographic origin</li>
-          </ul>
-        </div>
-
-      <div>
       </div>
       </article>
       <hr>

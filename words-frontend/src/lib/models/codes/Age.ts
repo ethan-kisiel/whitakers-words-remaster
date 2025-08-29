@@ -54,7 +54,7 @@ export class Age {
                     'Coined recently, words for new things (19th-21st centuries)'
                 );
             default:
-                throw new Error('Failed to match age value');
+                return '';
         }
     }
 }

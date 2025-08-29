@@ -30,6 +30,7 @@ public class WordsParser
 
     private static DictionaryCodes ParseCodes(string codeString)
     {
+        Console.WriteLine(codeString);
         return new DictionaryCodes(codeString[0], codeString[1], codeString[2], codeString[3], codeString[4]);
     }
 
@@ -91,9 +92,18 @@ public class WordsParser
 
                     // TODO: make everything optional except for the codes
                     // this will require modifying both the rootline object and the regex.
-                    rootLine.Root = rootLineMatch.Groups["roots"].Value;
-                    rootLine.PartOfSpeech = rootLineMatch.Groups["pos"].Value;
+                    
+                    if (rootLineMatch.Groups["roots"].Success)
+                    {
+                        rootLine.Root = rootLineMatch.Groups["roots"].Value;
+                    }
 
+                    if (rootLineMatch.Groups["pos"].Success)
+                    {
+                        rootLine.PartOfSpeech = rootLineMatch.Groups["pos"].Value;
+                    }
+                    
+                    
                     if (rootLineMatch.Groups["iter"].Success)
                     {
                         rootLine.Version = rootLineMatch.Groups["iter"].Value;
@@ -102,7 +112,11 @@ public class WordsParser
                     if (rootLineMatch.Groups["gender"].Success)
                     {
                         rootLine.Gender = rootLineMatch.Groups["gender"].Value;
+                    }
 
+                    if (rootLineMatch.Groups["kind"].Success)
+                    {
+                        rootLine.Kind = rootLineMatch.Groups["kind"].Value;
                     }
 
                     rootLine.Codes = ParseCodes(rootLineMatch.Groups["dictCodes"].Value);
