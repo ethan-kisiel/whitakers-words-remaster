@@ -1,8 +1,8 @@
 
 
 # Explicitly set rules for your critical data files
-**/*.LAT text eol=binary
-**/*.GEN text eol=binary
+words/INFLECTS.LAT text eol=crlf
+words/DICTLINE.GEN text eol=binary
 **/*.ADDONS text eol=binary
 **/*.UNIQUES text eol=binary
 **/*.txt text eol=binary
