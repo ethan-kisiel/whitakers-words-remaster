@@ -5,9 +5,9 @@ export class LatinSearchResult extends HTMLElement {
 
   public declare searchResult: Record<string, unknown>;
 
+
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
   }
 
   attributeChangedCallback(name: string, _: unknown, newValue: string) {
@@ -18,9 +18,9 @@ export class LatinSearchResult extends HTMLElement {
   }
 
   connectedCallback() {
-    this.shadowRoot!.innerHTML = `
-      <link rel="stylesheet" href="src/style.css" />
-
+    this.innerHTML = `
+      <script>
+      </script>
       <article class="dictionary-entry">
       <view-selector id="viewSelector" views-count='2'></view-selector>
       <div id="views">
@@ -39,10 +39,10 @@ export class LatinSearchResult extends HTMLElement {
 
       this.clearViews();
       this.showView(0);
-      const viewSelector = this.shadowRoot?.querySelector('#viewSelector') as HTMLElement;
+      const viewSelector = this.querySelector('#viewSelector') as HTMLElement;
 
       viewSelector.addEventListener('viewSelected', (event) => {
-        const viewDiv = this.shadowRoot?.querySelector('#views') as HTMLDivElement;
+        const viewDiv = this.querySelector('#views') as HTMLDivElement;
         const viewsCount = viewDiv.children.length;
         const viewIndex = (event as CustomEvent).detail.index % viewsCount;
 
@@ -51,13 +51,13 @@ export class LatinSearchResult extends HTMLElement {
       });
   }
   showView(index: number) {
-    const viewDiv = this.shadowRoot?.querySelector('#views') as HTMLDivElement;
+    const viewDiv = this.querySelector('#views') as HTMLDivElement;
 
    (viewDiv.children[index] as HTMLElement).style.display = 'block';
   }
 
   clearViews(){
-    const viewDiv = this.shadowRoot?.querySelector('#views') as HTMLDivElement;
+    const viewDiv = this.querySelector('#views') as HTMLDivElement;
 
     for (const child of viewDiv.children) {
       (child as HTMLElement).style.display = 'none';
@@ -66,7 +66,7 @@ export class LatinSearchResult extends HTMLElement {
 
 
   generateRootLines() {
-    const rootsDiv = this.shadowRoot?.querySelector('#roots') as HTMLDivElement;
+    const rootsDiv = this.querySelector('#roots') as HTMLDivElement;
     for (const line of this.searchResult.rootLines as []) {
       const newRoot = document.createElement('root-line');
       newRoot.setAttribute('line', JSON.stringify(line));
@@ -84,7 +84,7 @@ export class LatinSearchResult extends HTMLElement {
   }
 
   generateMatches() {
-    const matchesDiv = this.shadowRoot?.querySelector('#matches') as HTMLDivElement;
+    const matchesDiv = this.querySelector('#matches') as HTMLDivElement;
     for (const match of this.searchResult.recordMatches as []) {
       const newMatch = document.createElement('word-match');
       newMatch.setAttribute('match', JSON.stringify(match));

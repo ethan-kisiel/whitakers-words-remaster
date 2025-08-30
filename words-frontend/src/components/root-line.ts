@@ -75,10 +75,12 @@ Geographic Origin: ${Region.getLongForm(this.region)}`;
         ${this.version} ${this.pos === 'N' || this.pos === 'PRON' || this.pos === 'ADJ' ? 'Declension' : 'Conjugation'} &emsp;
         ` : '';
 
+        const kindHtml = this.kind ? `${this.kind}` : '';
+
         this.innerHTML = `
         <div class='one-line'>
         <span class="tooltip" data-tooltip="${dictDataHtml}">ⓘ</span>
-        <h3>${rootsHtml} ${genderHtml} ${version} ${posHtml}</h3>
+        <h3>${rootsHtml} ${genderHtml} ${version} ${posHtml} ${kindHtml}</h3>
         </div>
         `;
     }

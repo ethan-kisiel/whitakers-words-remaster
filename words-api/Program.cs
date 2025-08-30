@@ -18,7 +18,7 @@ builder.Services.AddCors(options =>
 
 
 var app = builder.Build();
-var translate = app.MapGroup("/translate");
+var translate = app.MapGroup("/api/translate");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -30,7 +30,6 @@ if (app.Environment.IsDevelopment())
 //app.UseHttpsRedirection();
 
 WordsUtil wordsUtil = new WordsUtil();
-
 
 translate.MapGet("/latin/{entry}", (string entry) =>
 {

@@ -22,3 +22,5 @@ words/EWDSFILE.GEN
 words/STEMLIST.GEN
 words/src/latin_utils/latin_utils-config.adb
 words/.gitignore
+
+words-api/obj/
