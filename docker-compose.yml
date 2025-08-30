@@ -10,6 +10,8 @@ services:
       - "80"
     expose:
       - "80"
+    environment:
+      - API_ROUTE=http://76.185.207.28:443
     networks:
       - appnet
 
