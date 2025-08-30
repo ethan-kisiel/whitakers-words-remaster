@@ -147,28 +147,21 @@ pre {
 
 /* Forms */
 
-label { display: inline-block; margin: .4rem 0 .2rem; }
 input, textarea, select {
   font: inherit;
-  color: inherit;
-  background: #fff;
+  color: var(--ink);
+  background: var(--paper);
   border: 1px solid var(--rule);
   border-radius: 6px;
   padding: .55rem .7rem;
   width: 100%;
-  transition: background .2s, border-color .2s;
+  transition: background .2s, border-color .2s, color .2s;
 }
+
 textarea { min-height: 7rem; resize: vertical; }
-fieldset {
-  border: 1px solid var(--rule);
-  border-radius: 8px;
-  padding: var(--space-3);
-  margin: var(--space-3) 0;
-}
-legend {
-  padding: 0 .4rem;
-  font-variant-caps: small-caps;
-  letter-spacing: .02em;
+
+input::placeholder, textarea::placeholder {
+  color: var(--ink-muted);
 }
 
 button, input[type="submit"], input[type="button"], .btn {
@@ -177,15 +170,18 @@ button, input[type="submit"], input[type="button"], .btn {
   padding: .55rem .9rem;
   border-radius: 8px;
   border: 1px solid var(--rule);
-  background: #fff;
+  background: var(--paper);
+  color: var(--ink);
   cursor: pointer;
-  transition: background .2s, border-color .2s, transform .05s;
+  transition: background .2s, border-color .2s, transform .05s, color .2s;
   margin: 5px;
 }
+
 button:hover, .btn:hover {
-  background: #f0ebe0;
+  background: var(--paper-deckle);
   border-color: var(--accent-muted);
 }
+
 button:active, .btn:active { transform: translateY(1px); }
 
 /* Dark mode refinement */

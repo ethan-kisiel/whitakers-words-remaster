@@ -10,57 +10,43 @@ export class InputFieldWithButton extends HTMLElement {
             justify-content: space-between;
             align-items: normal;
         }
-        label { display: inline-block; margin: .4rem 0 .2rem; }
-        input, textarea, select {
-        font: inherit;
-        color: inherit;
-        background: #fff;
-        border: 1px solid var(--rule);
-        border-radius: 6px;
-        padding: .55rem .7rem;
-        width: 100%;
-        transition: background .2s, border-color .2s;
-        }
-        textarea { min-height: 7rem; resize: vertical; }
-        fieldset {
-        border: 1px solid var(--rule);
-        border-radius: 8px;
-        padding: var(--space-3);
-        margin: var(--space-3) 0;
-        }
+input, textarea, select {
+  font: inherit;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: .55rem .7rem;
+  width: 100%;
+  transition: background .2s, border-color .2s, color .2s;
+  margin: 5px;
+}
 
-        button, input {
-        margin: 2.5px;
-        }
-        button, input[type="submit"], input[type="button"], .btn {
-        font: inherit;
-        display: inline-block;
-        padding: .55rem .7rem;
-        border-radius: 8px;
-        border: 1px solid var(--rule);
-        background: #fff;
-        cursor: pointer;
-        transition: background .2s, border-color .2s, transform .05s;
-        }
+textarea { min-height: 7rem; resize: vertical; }
 
-        button:hover, .btn:hover {
-        background: #f0ebe0;
-        border-color: var(--accent-muted);
-        }
-        button:active, .btn:active { transform: translateY(1px); }
+input::placeholder, textarea::placeholder {
+  color: var(--ink-muted);
+}
 
-        pre { background: #201d19; }
-        input, textarea, select {
-            background: #2a2622;
-            border-color: var(--rule);
-            color: var(--ink);
-        }
-        button, input[type="submit"], input[type="button"], .btn {
-            background: #2a2622;
-            color: var(--ink);
-            border-color: var(--rule);
-        }
-        button:hover, .btn:hover { background: #33302b; border-color: var(--accent-muted); }
+button, input[type="submit"], input[type="button"], .btn {
+  font: inherit;
+  display: inline-block;
+  padding: .55rem .7rem;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+  transition: background .2s, border-color .2s, transform .05s, color .2s;
+  margin: 5px;
+}
+
+button:hover, .btn:hover {
+  background: var(--paper-deckle);
+  border-color: var(--accent-muted);
+}
+
+button:active, .btn:active { transform: translateY(1px); }
     `
 
     constructor() {
