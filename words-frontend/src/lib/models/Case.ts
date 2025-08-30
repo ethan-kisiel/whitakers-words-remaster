@@ -24,7 +24,7 @@ export class Case {
                 );
             case this.vocative:
                 return (!detailed?
-                    'vocative':
+                    'Vocative':
                     'used for direct address, functioning as the person being spoken to'
                 );
             case this.genitive:

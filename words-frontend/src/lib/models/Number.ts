@@ -1,6 +1,6 @@
 export type NumberValue = 'X' | 'S' | 'P';
 
-export class Number {
+export class WordNumber {
 
     private static default = 'X';
     private static singular = 'S';
@@ -10,7 +10,7 @@ export class Number {
         switch (value) {
             case this.default:
                 return (!detailed?
-                    'Unknown' :
+                    'Unknown Number' :
                     'Default/unspecified number');
             case this.singular:
                 return (!detailed?

@@ -60,33 +60,25 @@ Domain: ${Domain.getLongForm(this.domain, true)}
 Geographic Origin: ${Region.getLongForm(this.region)}`;
 
         const rootsHtml = this.roots ? `
-        <h3>
             &emsp; <em>${this.roots}</em> &emsp;
-        </h3>
         ` : '';
 
         const posHtml = this.pos ? `
-        <h3>
         ${PartsOfSpeech.getLongForm(this.pos)} &emsp;
-        </h3>
         ` : '';
 
         const genderHtml = this.gender ? `
-        <h3>
             <span class="tooltip" data-tooltip="${Gender.getLongForm(this.gender)}">${this.gender}.</span> &emsp;
-        </h3>
         ` : '';
 
         const version = this.version ? `
-        <h3>
-            ${this.version} ${this.pos === 'N' || this.pos === 'PRON' || this.pos === 'ADJ' ? 'Declension' : 'Conjugation'} &emsp;
-        </h3>
+        ${this.version} ${this.pos === 'N' || this.pos === 'PRON' || this.pos === 'ADJ' ? 'Declension' : 'Conjugation'} &emsp;
         ` : '';
 
         this.innerHTML = `
         <div class='one-line'>
         <span class="tooltip" data-tooltip="${dictDataHtml}">ⓘ</span>
-        ${rootsHtml} ${genderHtml} ${version} ${posHtml}
+        <h3>${rootsHtml} ${genderHtml} ${version} ${posHtml}</h3>
         </div>
         `;
     }

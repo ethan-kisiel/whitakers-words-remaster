@@ -12,7 +12,7 @@ export class Gender {
         switch (value) {
             case this.default:
                 return (!detailed?
-                    'Unknown' :
+                    'Unknown Gender' :
                     'Default/unspecified gender');
             case this.masculine:
                 return (!detailed?
@@ -28,7 +28,7 @@ export class Gender {
                     'Neuter gender');
             case this.common:
                 return (!detailed?
-                    'Common' :
+                    'Common Gender' :
                     'Common gender (masculine or feminine)');
             default:
                 return '';

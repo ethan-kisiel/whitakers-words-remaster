@@ -12,7 +12,7 @@
 
 namespace words_api.Lib.Enums;
 
-public class Tense
+public class TenseType
 {
     public const string Default = "X";
     public const string Present = "PRES";
@@ -21,4 +21,9 @@ public class Tense
     public const string Perfect = "PERF";
     public const string Pluperfect = "PLUP";
     public const string FuturePerfect = "FUTP";
+
+    public static bool IsTense(string input)
+    {
+        return (input == Present || input == Imperfect || input == Future || input == Perfect || input == Pluperfect || input == FuturePerfect);
+    }
 }

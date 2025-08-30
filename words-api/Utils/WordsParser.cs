@@ -107,6 +107,7 @@ public class WordsParser
                     if (rootLineMatch.Groups["iter"].Success)
                     {
                         rootLine.Version = rootLineMatch.Groups["iter"].Value;
+                        rootLine.Version = rootLine.Version.TrimStart('(').TrimEnd(')');
                     }
 
                     if (rootLineMatch.Groups["gender"].Success)

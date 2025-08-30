@@ -18,20 +18,36 @@ namespace words_api.Lib.BridgeRecords;
 public class VerbRecord: RecordBase
 {
     public string Declension { get; set; }
-    public string Tense { get; set; }
-    public string Voice { get; set; }
-    public string Mood { get; set; }
+    public string? Tense { get; set; }
+    public string? Voice { get; set; }
+    public string? Mood { get; set; }
     public string Person { get; set; }
     public string Number { get; set; }
 
-    public VerbRecord(string wordMatch, string declension, string tense, string voice, string mood, string person, string number): base(wordMatch, PartsOfSpeech.Verb)
+    public VerbRecord(string wordMatch, string declension, params string[] rest): base(wordMatch, PartsOfSpeech.Verb)
     {
         Declension = declension;
-        Tense = tense;
-        Voice = voice;
-        Mood = mood;
-        Person = person;
-        Number = number;
+
+        for (int i = 0; i < rest.Length - 2; i++)
+        {
+            if (TenseType.IsTense(rest[i]))
+            {
+                Tense = rest[i];
+            }
+
+            if (VoiceType.IsVoice(rest[i]))
+            {
+                Voice = rest[i];
+            }
+
+            if (MoodType.IsMood(rest[i]))
+            {
+                Mood = rest[i];
+            }
+        }
+        
+        Person = rest[^2];
+        Number = rest[^1];
     }
     
     public override string ToJson()

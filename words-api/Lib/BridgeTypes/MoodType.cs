@@ -12,7 +12,7 @@
 
 namespace words_api.Lib.Enums;
 
-public class Mood
+public class MoodType
 {
     public const string Default = "X";
     public const string Indicative = "IND";
@@ -20,4 +20,10 @@ public class Mood
     public const string Imperative = "IMP";
     public const string Infinative = "INF";
     public const string Participle = "PPL";
+
+
+    public static bool IsMood(string input)
+    {
+        return (input == Indicative || input == Subjunctive || input == Imperative || input == Infinative || input == Participle);
+    }
 }

@@ -12,9 +12,14 @@
 
 namespace words_api.Lib.Enums;
 
-public class Voice
+public class VoiceType
 {
     public const string Default = "X";
     public const string Active = "ACTIVE";
     public const string Passive = "PASSIVE";
+
+    public static bool IsVoice(string input)
+    {
+        return (input == Active || input == Passive);
+    }
 }

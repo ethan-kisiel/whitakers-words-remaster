@@ -1,4 +1,4 @@
-export type VoiceKind = 'X' | 'ACTIVE' | 'PASSIVE';
+export type VoiceValue = 'X' | 'ACTIVE' | 'PASSIVE';
 
 export class Voice {
 
@@ -6,7 +6,7 @@ export class Voice {
     private static active = 'ACTIVE';
     private static passive = 'PASSIVE';
 
-    static getLongForm(value: VoiceKind, detailed=false): string {
+    static getLongForm(value: VoiceValue, detailed=false): string {
         switch (value) {
             case this.default:
                 return (!detailed?

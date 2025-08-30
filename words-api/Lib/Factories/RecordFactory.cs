@@ -34,7 +34,7 @@ public class RecordFactory
             case PartsOfSpeech.Supine:
                 return new PronounRecord(wordMatch, wordParams[0], wordParams[2], wordParams[3], wordParams[4]);
             case PartsOfSpeech.Verb:
-                return new VerbRecord(wordMatch, wordParams[0], wordParams[2], wordParams[3], wordParams[4], wordParams[5], wordParams[6]);
+                return new VerbRecord(wordMatch, wordParams[0], wordParams[2..]);
             case PartsOfSpeech.VerbParticiple:
                 return new VerbParticipleRecord(wordMatch, wordParams[0], wordParams[2], wordParams[3], wordParams[4], wordParams[5], wordParams[6], wordParams[7]);
             default:

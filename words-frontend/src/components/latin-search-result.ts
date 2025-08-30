@@ -22,17 +22,12 @@ export class LatinSearchResult extends HTMLElement {
       <link rel="stylesheet" href="src/style.css" />
 
       <article class="dictionary-entry">
-      <view-selector id="viewSelector" views-count='3'></view-selector>
+      <view-selector id="viewSelector" views-count='2'></view-selector>
       <div id="views">
         <div id="roots">
         </div>
 
-        <div>
-        view 2
-        </div>
-
-        <div>
-        view 3
+        <div id="matches">
         </div>
       </div>
       </article>
@@ -40,6 +35,7 @@ export class LatinSearchResult extends HTMLElement {
       `;
 
       this.generateRootLines();
+      this.generateMatches();
 
       this.clearViews();
       this.showView(0);
@@ -80,11 +76,21 @@ export class LatinSearchResult extends HTMLElement {
 
     const meaningsHtml = this.searchResult.meanings ? `
     <p>
-        <strong>Meanings:</strong> ${(this.searchResult.meanings as []).join(';')}. &emsp;
+        <em><small>Meanings:</small></em> ${(this.searchResult.meanings as []).join(';')}. &emsp;
     </p>
     ` : '';
 
     rootsDiv.innerHTML += meaningsHtml;
+  }
+
+  generateMatches() {
+    const matchesDiv = this.shadowRoot?.querySelector('#matches') as HTMLDivElement;
+    for (const match of this.searchResult.recordMatches as []) {
+      const newMatch = document.createElement('word-match');
+      newMatch.setAttribute('match', JSON.stringify(match));
+
+      matchesDiv.appendChild(newMatch);
+    }
   }
 
 }
