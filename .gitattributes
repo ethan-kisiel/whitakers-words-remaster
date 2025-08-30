@@ -1,0 +1,9 @@
+# Force all text files to use LF (Unix) line endings
+* text=auto eol=lf
+
+# Explicitly set rules for your critical data files
+**/*.LAT text eol=crlf
+# **/*.GEN text eol=crlf
+# **/*.ADDONS text eol=crlf
+# **/*.UNIQUES text eol=crlf
+# **/*.txt text eol=crlf
