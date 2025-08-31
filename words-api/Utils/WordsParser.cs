@@ -49,7 +49,7 @@ public class WordsParser
     // base readout
     // definitions readout
 
-    public static LatinLookup[] ParseLatinSearch(string input)
+    public static LatinLookup[] ParseLatinSearch(string input, string searchQuery)
     {
         List<LatinLookup> lookupResults = new();
         
@@ -57,6 +57,7 @@ public class WordsParser
         
         List<RecordBase> currentRecords = new();
         List<RootLine> currentRootLines = new();
+        string currentMeaningLine = string.Empty;
 
         foreach (var line in input.Split('\n'))
         {
@@ -66,18 +67,8 @@ public class WordsParser
             if (Regex.IsMatch(trimmedLine, RegexPatterns.DefinitionPattern)) // we have hit a definition
             {
                 Console.WriteLine("Definition Match");
-                currentLookup.Meanings = trimmedLine.Split(';')
-                    .Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
-
-                currentLookup.RecordMatches = currentRecords.ToArray();
-                currentLookup.RootLines = currentRootLines.ToArray();
-                
-                lookupResults.Add(currentLookup);
-                
-                currentRecords.Clear();
-                currentRootLines.Clear();
-                
-                currentLookup = new LatinLookup();
+                currentMeaningLine = $"{currentMeaningLine}{trimmedLine}";
+                continue;
             }
 
             if (Regex.IsMatch(trimmedLine, RegexPatterns.WordRootLineMatchPattern))
@@ -122,6 +113,7 @@ public class WordsParser
 
                     rootLine.Codes = ParseCodes(rootLineMatch.Groups["dictCodes"].Value);
                     currentRootLines.Add(rootLine);
+                    continue;
                 }
                 catch (Exception e)
                 {
@@ -131,9 +123,44 @@ public class WordsParser
             
             if (Regex.IsMatch(trimmedLine, RegexPatterns.RecordMatchPattern))
             {
+
+                if (currentMeaningLine != string.Empty)
+                {
+                    currentLookup.Meanings = currentMeaningLine.Split(';')
+                        .Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
+
+                    currentLookup.RecordMatches = currentRecords.ToArray();
+                    currentLookup.RootLines = currentRootLines.ToArray();
+                    
+                    currentLookup.SearchQuery = searchQuery;
+                    
+                    lookupResults.Add(currentLookup);
+                
+                    currentMeaningLine = string.Empty;
+                    currentRecords.Clear();
+                    currentRootLines.Clear();
+                
+                    currentLookup = new LatinLookup();
+                }
                 Console.WriteLine("Record Match");
                 currentRecords.Add(ParseRecord(line));
             }
+        }
+        
+        if (currentMeaningLine != string.Empty)
+        {
+            currentLookup.Meanings = currentMeaningLine.Split(';')
+                .Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
+
+            currentLookup.RecordMatches = currentRecords.ToArray();
+            currentLookup.RootLines = currentRootLines.ToArray();
+                    
+            currentLookup.SearchQuery = searchQuery;
+                    
+            lookupResults.Add(currentLookup);
+            
+            currentRecords.Clear();
+            currentRootLines.Clear();
         }
 
         return lookupResults.ToArray();

@@ -86,7 +86,7 @@ export class WordMatch extends HTMLElement {
         : '';
 
         const voiceHtml = this.voice ?
-        `<em><small>Voice:</asmall></em> ${Voice.getLongForm(this.voice)}`
+        `<em><small>Voice:</small></em> ${Voice.getLongForm(this.voice)}`
         : '';
 
         const moodHtml = this.mood ?

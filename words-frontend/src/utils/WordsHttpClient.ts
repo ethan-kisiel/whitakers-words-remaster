@@ -2,7 +2,7 @@ export default class WordsHttpClient {
     declare private _endpoint: string;
     private _translateRoute = "/translate";
 
-    public static shared = new WordsHttpClient('http://76.185.207.28:443/api');
+    public static shared = new WordsHttpClient(`${import.meta.env.VITE_API_URL}/api`);
 
     constructor(endpoint: string) {
         this._endpoint = endpoint;

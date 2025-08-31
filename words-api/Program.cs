@@ -35,8 +35,17 @@ translate.MapGet("/latin/{entry}", (string entry) =>
 {
     try
     {
-        var result = wordsUtil.Run($"{entry}");
-        return WordsParser.ParseLatinSearch(result);
+        
+        var sanitizedEntries = SanitizeUtil.Sanitize(entry).Split(' ').Where(e => !string.IsNullOrEmpty(e));
+        if (sanitizedEntries.Count() > 10)
+        {
+            sanitizedEntries = sanitizedEntries.ToArray()[..10];
+        }
+        
+        var result = sanitizedEntries.
+            Select(e => WordsParser.ParseLatinSearch(wordsUtil.Run($"{e}"), e))
+            .Aggregate((a, b) => a.Concat(b).ToArray());
+        return result;
     }
     catch (Exception ex)
     {
