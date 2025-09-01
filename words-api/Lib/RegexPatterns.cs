@@ -21,7 +21,9 @@ public class RegexPatterns
 
     public const string CaptureDictionaryCodesPattern = @"\[([A-Z]{5})]$";
 
-    public const string CaptureRootLinePattern =
+    public const string EnglishCaptureRootLinePattern =  @"^(?:(?<roots>\S+(?:[,\s*]\S+)*))?(?:\s+(?<pos>[A-Z]+))?(?:\s+(?<iter>\([^)]*\)))?(?:\s+(?:(?<gender>(?=(?:N|ADJ)\b)[MFNC])|(?<kind>(?!(?:N|ADJ)\b)(?:\S+(?:\s+\S+)?))))?(?:\s+\d+\s+\d+(?:\s+[A-Z]+)?)?\s*\[(?<dictCodes>[A-Z]{5})\]$";
+    
+    public const string LatinCaptureRootLinePattern =
         @"^(?:(?<roots>\S+(?:[,\s*]\S+)*))?(?:\s+(?<pos>[A-Z]+))?(?:\s+(?<iter>\([^)]*\)))?(?:\s+(?:(?<gender>(?=(?:N|ADJ)\b)[MFNC])|(?<kind>(?!(?:N|ADJ)\b)(?:\S+(?:\s+\S+)?))))?(\s?)+\[(?<dictCodes>[A-Z]{5})\]$";
         
     

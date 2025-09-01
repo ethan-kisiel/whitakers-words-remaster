@@ -4,8 +4,9 @@ import { Frequency, type FrequencyValue } from "../lib/models/codes/Frequency";
 import { Region, type RegionValue } from "../lib/models/codes/Region";
 import { Source, type SourceValue } from "../lib/models/codes/Source";
 import { Gender, type GenderValue } from "../lib/models/Gender";
+import { NounKind, type NounKindValue } from "../lib/models/NounKind";
 import { PartsOfSpeech, type PartsOfSpeechValue } from "../lib/models/PartOfSpeech";
-import type { PronounKindValue } from "../lib/models/PronounKind";
+import { PronounKind, type PronounKindValue } from "../lib/models/PronounKind";
 
 export class RootLine extends HTMLElement {
     public static htmlName = 'root-line';
@@ -20,7 +21,7 @@ export class RootLine extends HTMLElement {
     private roots?: string;
     private pos?: PartsOfSpeechValue;
     private gender?: GenderValue;
-    private kind?: PronounKindValue;
+    private kind?: PronounKindValue | NounKind;
     private version?: string;
 
     constructor() {
@@ -60,28 +61,28 @@ Domain: ${Domain.getLongForm(this.domain, true)}
 Geographic Origin: ${Region.getLongForm(this.region)}`;
 
         const rootsHtml = this.roots ? `
-            &emsp; <em>${this.roots}</em> &emsp;
+             <em>${this.roots}</em>
         ` : '';
 
         const posHtml = this.pos ? `
-        ${PartsOfSpeech.getLongForm(this.pos)} &emsp;
+        ${PartsOfSpeech.getLongForm(this.pos)}
         ` : '';
 
         const genderHtml = this.gender ? `
-            <span class="tooltip" data-tooltip="${Gender.getLongForm(this.gender)}">${this.gender}.</span> &emsp;
+            <span class="tooltip" data-tooltip="${Gender.getLongForm(this.gender)}">${this.gender}.</span>
         ` : '';
 
         const version = this.version ? `
-        ${this.version} ${this.pos === 'N' || this.pos === 'PRON' || this.pos === 'ADJ' ? 'Declension' : 'Conjugation'} &emsp;
+        ${this.version} ${this.pos === 'N' || this.pos === 'PRON' || this.pos === 'ADJ' ? 'Declension' : 'Conjugation'}
         ` : '';
 
-        const kindHtml = this.kind ? `${this.kind}` : '';
+        const kindHtml = this.kind ?`
+        ${this.pos === 'N' ? NounKind.getLongForm(this.kind as NounKindValue) :
+            PronounKind.getLongForm(this.kind as PronounKindValue)}` : '';
 
         this.innerHTML = `
-        <div class='one-line'>
-        <span class="tooltip" data-tooltip="${dictDataHtml}">ⓘ</span>
-        <h3>${rootsHtml} ${genderHtml} ${version} ${posHtml} ${kindHtml}</h3>
-        </div>
+        <h3>${rootsHtml}<span class="tooltip" data-tooltip="${dictDataHtml}">ⓘ</span></h3>
+        <small><p>${genderHtml} ${version} ${posHtml} ${kindHtml}</p></small>
         `;
     }
 }

@@ -1,7 +1,5 @@
 /* =====================================================================
-   Textbook Theme — theme-textbook.css (Refined)
-   - Clean, print-inspired style
-   - Consistent dark mode (inputs, buttons, forms aligned)
+   Textbook Theme — theme-textbook.css (Refined, Fluid Typography)
    ===================================================================== */
 
 :root {
@@ -22,11 +20,12 @@
   --sans: ui-sans-serif, "Source Sans Pro", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
 
-  --base-size: 18px;
+  /* Fluid font sizing */
+  --base-size: clamp(16px, 1vw + 0.5rem, 20px);
   --leading: 1.7;
   --measure: 120ch;
-  --small: 0.9rem;
-  --micro: 0.78rem;
+  --small: clamp(0.8rem, 0.4vw + 0.6rem, 0.95rem);
+  --micro: clamp(0.7rem, 0.3vw + 0.55rem, 0.85rem);
 
   /* Rhythm */
   --space-1: 0.35rem;
@@ -93,27 +92,32 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--serif);
   font-weight: 600;
   line-height: 1.25;
-  margin: var(--space-5) 0 var(--space-2);
+  margin: var(--space-1) 0 var(--space-2);
   color: var(--ink);
   font-variant-caps: small-caps;
   letter-spacing: .02em;
 }
 
-h1 { font-size: 2rem; }
-h2 { font-size: 1.6rem; }
-h3 { font-size: 1.35rem; }
-h4 { font-size: 1.2rem; }
-h5 { font-size: 1.05rem; }
-h6 { font-size: 1rem; color: var(--ink-muted); }
+h1 { font-size: clamp(1.8rem, 2vw + 1rem, 2.5rem); }
+h2 { font-size: clamp(1.5rem, 1.5vw + 0.9rem, 2rem); }
+h3 { font-size: clamp(1.25rem, 1vw + 0.8rem, 1.6rem); }
+h4 { font-size: clamp(1.1rem, 0.8vw + 0.7rem, 1.3rem); }
+h5 { font-size: clamp(1rem, 0.6vw + 0.65rem, 1.15rem); }
+h6 { font-size: clamp(0.95rem, 0.5vw + 0.6rem, 1rem); color: var(--ink-muted); }
 
 p { margin: 0 0 var(--space-3); }
 
 a {
   color: var(--accent);
+  text-decoration: none;
+}
+
+a.active {
   text-decoration: underline;
   text-underline-offset: 2px;
 }
-a:hover { color: var(--accent-muted); }
+
+a:hover { color: var(--accent-muted); cursor:pointer }
 
 small, figcaption, caption { font-size: var(--small); color: var(--ink-muted); }
 
@@ -142,6 +146,7 @@ pre {
   border-radius: 6px;
   overflow: auto;
 }
+
 
 /* Lists, Tables, Figures unchanged for brevity */
 
@@ -276,47 +281,55 @@ button:active, .btn:active { transform: translateY(1px); }
 
 
 
-  /* Dictionary entry styling */
+:root {
+  --surface: #fffdf7;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface: #1a1714;
+  }
+}
+
+/* Dictionary entry styling */
 .dictionary-entry {
-  margin: 2rem 0;
-  padding: 1rem 1.5rem;
+  margin: var(--space-5) 0;
+  padding: var(--space-4);
   border-left: 4px solid var(--accent);
-  background-color: color-mix(in srgb, var(--surface) 95%, var(--text) 5%);
-  border-radius: 0.25rem;
+  background-color: var(--surface);
+  border-radius: 0.5rem;
 }
 
 .dictionary-entry h3 {
   font-family: var(--serif);
   font-size: 1.2rem;
   font-style: italic;
-  margin-top: 0;
-  margin-bottom: 0.25rem;
+  margin: 0 0 var(--space-2);
 }
 
 .dictionary-entry h3 abbr {
   font-variant: small-caps;
   font-style: normal;
-  margin-left: 0.5rem;
-  color: var(--muted);
+  margin-left: var(--space-1);
+  color: var(--ink-muted);
 }
 
 .dictionary-entry p {
-  margin: 0.25rem 0 0.75rem 0;
+  margin: 0 0 var(--space-3);
   line-height: 1.5;
 }
 
 .dictionary-entry ul {
-  margin: 0.25rem 0 0.75rem 1.25rem;
+  margin: 0 0 var(--space-3) var(--space-4);
   padding: 0;
-  list-style-type: "";
+  list-style-type: "– "; /* subtle dash bullets */
 }
 
 .dictionary-entry blockquote {
   font-style: italic;
-  margin: 0.5rem 0 0 1rem;
-  padding-left: 1rem;
-  border-left: 2px solid var(--muted);
-  color: var(--muted);
+  margin: var(--space-3) 0 0 var(--space-4);
+  padding-left: var(--space-3);
+  border-left: 2px solid var(--ink-muted);
+  color: var(--ink-muted);
 }
 
 

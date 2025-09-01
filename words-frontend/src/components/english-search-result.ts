@@ -1,7 +1,7 @@
 
-export class LatinSearchResult extends HTMLElement {
+export class EnglishSearchResult extends HTMLElement {
   public static observedAttributes = ['search-result'];
-  public static htmlName = 'latin-search-result';
+  public static htmlName = 'english-search-result';
 
   public declare searchResult: Record<string, unknown>;
 
@@ -20,12 +20,9 @@ export class LatinSearchResult extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
       <article class="dictionary-entry">
-      <view-selector id="viewSelector" views-count='2'></view-selector>
+      <view-selector id="viewSelector" views-count='1'></view-selector>
       <div id="views">
         <div id="roots">
-        </div>
-
-        <div id="matches">
         </div>
       </div>
       </article>
@@ -33,7 +30,6 @@ export class LatinSearchResult extends HTMLElement {
       `;
 
       this.generateRootLines();
-      this.generateMatches();
 
       this.clearViews();
       this.showView(0);
@@ -80,19 +76,8 @@ export class LatinSearchResult extends HTMLElement {
 
     rootsDiv.innerHTML += meaningsHtml;
   }
-
-  generateMatches() {
-    const matchesDiv = this.querySelector('#matches') as HTMLDivElement;
-    for (const match of this.searchResult.recordMatches as []) {
-      const newMatch = document.createElement('word-match');
-      newMatch.setAttribute('match', JSON.stringify(match));
-
-      matchesDiv.appendChild(newMatch);
-    }
-  }
-
 }
 
-if (!window.customElements.get(LatinSearchResult.htmlName)) {
-  window.customElements.define(LatinSearchResult.htmlName, LatinSearchResult);
+if (!window.customElements.get(EnglishSearchResult.htmlName)) {
+  window.customElements.define(EnglishSearchResult.htmlName, EnglishSearchResult);
 }

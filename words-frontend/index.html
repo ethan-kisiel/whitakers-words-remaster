@@ -4,30 +4,33 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Whitakers Words Online</title>
+  <link rel="icon" type="image/png" href="/wwr-dark.png" media="(prefers-color-scheme: dark)">
+  <link rel="icon" type="image/png" href="/wwr-light.png" media="(prefers-color-scheme: light)">
   <link rel="stylesheet" href="src/style.css" />
   <script type="module" src="src/components/word-match.ts"></script>
   <script type="module" src="src/components/root-line.ts"></script>
   <script type="module" src="src/components/view-selector.ts"></script>
   <script type="module" src="src/components/latin-search-result.ts"></script>
+  <script type="module" src="src/components/english-search-result.ts"></script>
   <script type="module" src="src/components/input-field-with-button.ts"></script>
   <script type="module" src="src/managers/search-manager.ts"></script>
 </head>
 <body class="light-dark">
   <div class="book">
     <header class="book-header">
-      <div>Whitakers Words Online</div>
+      <div>Whitakers Words Remastered</div>
       <nav class="nav">
-        <a href="#">Latin Search</a>
-        <a href="#">English Search</a>
+        <a id="select-latin-search" class="active">Latin Search</a>
+        |
+        <a id="select-english-search">English Search</a>
       </nav>
     </header>
 
     <main>
-      <h1>Latin Search</h1>
+      <h1 id="search-type-label">Latin Search</h1>
       <input-field-with-button></input-field-with-button>
 
       <section id="dictionary">
-        <h2>Results:</h2>
       </section>
     <footer class="book-footer">
       <div>&copy; 2025 Whitakers Words Remastered</div>

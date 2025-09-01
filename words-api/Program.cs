@@ -43,7 +43,7 @@ translate.MapGet("/latin/{entry}", (string entry) =>
         }
         
         var result = sanitizedEntries.
-            Select(e => WordsParser.ParseLatinSearch(wordsUtil.Run($"{e}"), e))
+            Select(e => WordsParser.ParseLatinSearch(wordsUtil.QueryLatin($"{e}"), e))
             .Aggregate((a, b) => a.Concat(b).ToArray());
         return result;
     }
@@ -58,12 +58,22 @@ translate.MapGet("/english/{entry}", (string entry) =>
 {
     try
     {
-        return wordsUtil.Run($"~e {entry}");
+        
+        var sanitizedEntries = SanitizeUtil.Sanitize(entry).Split(' ').Where(e => !string.IsNullOrEmpty(e));
+        if (sanitizedEntries.Count() > 10)
+        {
+            sanitizedEntries = sanitizedEntries.ToArray()[..10];
+        }
+        
+        var result = sanitizedEntries.
+            Select(e => WordsParser.ParseEnglishSearch(wordsUtil.QueryEnglish($"{e}"), e))
+            .Aggregate((a, b) => a.Concat(b).ToArray());
+        return result;
     }
     catch (Exception ex)
     {
         Console.WriteLine(ex.Message);
-        return "";
+        return [];
     }
 });
 

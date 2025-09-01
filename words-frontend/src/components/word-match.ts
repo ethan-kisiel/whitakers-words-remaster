@@ -56,25 +56,25 @@ export class WordMatch extends HTMLElement {
 
     connectedCallback() {
         const matchHtml = `${this.wordMatch}`;
-        const partOfSpeechHtml = `&emsp;${PartsOfSpeech.getLongForm(this.pos)}`;
+        const partOfSpeechHtml = `${PartsOfSpeech.getLongForm(this.pos)}`;
 
         const caseHtml = this.case ?
         `${Case.getLongForm(this.case)}`
         : '';
 
-        const genderHtml = this.gender ? `&emsp;
-            <span class="tooltip" data-tooltip="${Gender.getLongForm(this.gender)}">${this.gender}.</span> &emsp;
+        const genderHtml = this.gender ? `
+            <span class="tooltip" data-tooltip="${Gender.getLongForm(this.gender)}">${this.gender}.</span>
         ` : '';
 
         const numberHtml = this.number ?
-        `&emsp;${WordNumber.getLongForm(this.number)}`
+        `${WordNumber.getLongForm(this.number)}`
         : '';
 
         const personHtml = this.person ?
-        `&emsp;${formatNumberAsOrdinal(parseInt(this.person))} Person`
+        `${formatNumberAsOrdinal(parseInt(this.person))} Person`
         : '';
 
-        const versionHtml = this.version ? `&emsp;
+        const versionHtml = this.version ? `
             ${formatNumberAsOrdinal(parseInt(this.version))} ${this.pos === 'N'
                 || this.pos === 'PRON'
                 || this.pos === 'ADJ' ?
@@ -82,25 +82,24 @@ export class WordMatch extends HTMLElement {
         ` : '';
 
         const tenseHtml = this.tense ?
-        `<em><small>Tense:</small></em> ${Tense.getLongForm(this.tense)}`
+        `Tense: <em>${Tense.getLongForm(this.tense)}</em>`
         : '';
 
         const voiceHtml = this.voice ?
-        `<em><small>Voice:</small></em> ${Voice.getLongForm(this.voice)}`
+        `Voice: <em>${Voice.getLongForm(this.voice)}</em>`
         : '';
 
         const moodHtml = this.mood ?
-        `<em><small>Mood:</small></em> ${Mood.getLongForm(this.mood)}`
+        `Mood: <em>${Mood.getLongForm(this.mood)}</em>`
         : '';
 
         const verbExtrasHtml = `${tenseHtml} ${voiceHtml} ${moodHtml}`;
 
 
         this.innerHTML = `
-        <h3>${matchHtml} ${genderHtml}</h3>
-        <p>${versionHtml} ${caseHtml} ${numberHtml} ${personHtml} ${partOfSpeechHtml}</p>
-        <p>${verbExtrasHtml}</p>
-        <hr>
+        <h3>${matchHtml} <small>${genderHtml}</small></h3>
+        <small><p>${versionHtml} ${caseHtml} ${numberHtml} ${personHtml} ${partOfSpeechHtml}</p></small>
+        <small><p>${verbExtrasHtml}</p></small>
         `;
     }
 

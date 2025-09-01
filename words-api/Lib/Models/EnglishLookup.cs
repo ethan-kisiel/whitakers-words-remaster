@@ -10,10 +10,13 @@
 // 
 // Copyright 2025 - 2025 Ethan Kisiel, Ethan Kisiel
 
+using words_api.Lib.BridgeRecords;
 using words_api.Lib.Interfaces;
 
 namespace words_api.Lib;
 
 public class EnglishLookup : LookupBase
 {
+    public RootLine[] RootLines { get; set; }
+    public string[] Meanings { get; set; } = [];
 }

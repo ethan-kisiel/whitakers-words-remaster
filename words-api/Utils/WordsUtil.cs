@@ -23,7 +23,7 @@ public class WordsUtil
         _wordsPath = wordsPath;
     }
 
-    public string Run(string arguments)
+    private string Run(string arguments)
     {
         var psi = new ProcessStartInfo
         {
@@ -50,5 +50,42 @@ public class WordsUtil
         
         Console.WriteLine(output);
         return output;
+    }
+
+    public string QueryLatin(string query)
+    {
+        if (string.IsNullOrEmpty(query))
+        {
+            return string.Empty;
+        }
+        try
+        {
+            return Run(query);
+        }
+        catch (Exception e)
+        {
+            // TODO: log and rethrow
+        }
+
+        return string.Empty;
+    }
+
+
+    public string QueryEnglish(string query)
+    {
+        if (string.IsNullOrEmpty(query))
+        {
+            return string.Empty;
+        }
+        try
+        {
+            return Run($"~e {query}");
+        }
+        catch (Exception e)
+        {
+            // TODO: log and rethrow
+        }
+
+        return string.Empty;
     }
 }

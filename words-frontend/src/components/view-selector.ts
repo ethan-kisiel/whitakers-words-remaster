@@ -65,6 +65,10 @@ export class ViewSelector extends HTMLElement {
     getDotsHtml(dotsCount: number) {
         let dotsHtml = `\<span class="dot active"\> \<\/span\>`;
 
+        if (dotsCount <= 1) {
+            return '';
+        }
+
         for (let i = 1; i < dotsCount; i++) {
             dotsHtml = `${dotsHtml}
             \<span class="dot"\> \<\/span\>`;
