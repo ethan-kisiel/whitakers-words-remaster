@@ -12,42 +12,51 @@
 
 using System.Text.Json;
 using words_api.Lib.Enums;
+using words_api.Lib.BridgeTypes.Verbs;
 
 namespace words_api.Lib.BridgeRecords;
 
 public class VerbRecord: RecordBase
 {
-    public string Declension { get; set; }
+    public string Conjugation { get; set; }
     public string? Tense { get; set; }
     public string? Voice { get; set; }
     public string? Mood { get; set; }
-    public string Person { get; set; }
-    public string Number { get; set; }
+    public string? Person { get; set; }
+    public string? Number { get; set; }
 
-    public VerbRecord(string wordMatch, string declension, params string[] rest): base(wordMatch, PartsOfSpeech.Verb)
+    public VerbRecord(string wordMatch, string conjugation, params string[] rest): base(wordMatch, PartsOfSpeech.Verb)
     {
-        Declension = declension;
+        Conjugation = conjugation;
 
-        for (int i = 0; i < rest.Length - 2; i++)
+        foreach (var code in rest)
         {
-            if (TenseType.IsTense(rest[i]))
+            if (TenseType.IsTense(code))
             {
-                Tense = rest[i];
+                Tense = code;
+                continue;
             }
 
-            if (VoiceType.IsVoice(rest[i]))
+            if (VoiceType.IsVoice(code))
             {
-                Voice = rest[i];
+                Voice = code;
+                continue;
             }
 
-            if (MoodType.IsMood(rest[i]))
+            if (MoodType.IsMood(code))
             {
-                Mood = rest[i];
+                Mood = code;
+                continue;
             }
+
+            if (NumberType.IsNumber(code))
+            {
+                Number = code;
+                continue;
+            }
+
+            Person = code; // person will be 0, 1, 2, etc
         }
-        
-        Person = rest[^2];
-        Number = rest[^1];
     }
     
     public override string ToJson()

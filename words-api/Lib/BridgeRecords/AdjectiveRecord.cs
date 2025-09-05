@@ -23,13 +23,34 @@ public class AdjectiveRecord : RecordBase
     public string Gender { get; set; }
     public string Comparison { get; set; }
 
-    public AdjectiveRecord(string wordMatch, string declension, string caseNumber, string number, string gender, string comparison): base(wordMatch, PartsOfSpeech.Adjective)
+    public AdjectiveRecord(string wordMatch, string declension, params string[] rest): base(wordMatch, PartsOfSpeech.Adjective)
     {
         Declension = declension;
-        Case = caseNumber;
-        Number = number;
-        Gender = gender;
-        Comparison = comparison;
+        foreach (var code in rest)
+        {
+            if (CaseType.IsCase(code))
+            {
+                Case = code;
+                continue;
+            }
+
+            if (NumberType.IsNumber(code))
+            {
+                Number = code;
+                continue;
+            }
+
+            if (GenderType.IsGender(code))
+            {
+                Gender = code;
+                continue;
+            }
+
+            if (ComparisonType.IsComparison(code))
+            {
+                Comparison = code;
+            }
+        }
     }
 
     public override string ToJson()

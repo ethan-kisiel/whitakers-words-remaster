@@ -18,16 +18,33 @@ namespace words_api.Lib.BridgeRecords;
 public class PronounRecord: RecordBase
 {
     public string Declension { get; set; }
-    public string Case { get; set; }
-    public string Number { get; set; }
-    public string Gender { get; set; }
+    public string? Case { get; set; }
+    public string? Number { get; set; }
+    public string? Gender { get; set; }
 
-    public PronounRecord(string wordMatch, string declension, string wordCase, string number, string gender): base(wordMatch, PartsOfSpeech.Pronoun)
+    public PronounRecord(string wordMatch, string declension, params string[] rest): base(wordMatch, PartsOfSpeech.Pronoun)
     {
         Declension = declension;
-        Case = wordCase;
-        Number = number;
-        Gender = gender;
+
+        foreach (string code in rest)
+        {
+            if (CaseType.IsCase(code))
+            {
+                Case = code;
+                continue;
+            }
+
+            if (NumberType.IsNumber(code))
+            {
+                Number = code;
+                continue;
+            }
+
+            if (GenderType.IsGender(code))
+            {
+                Gender = code;
+            }
+        }
     }
     
     public override string ToJson()

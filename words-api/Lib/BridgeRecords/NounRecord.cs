@@ -22,12 +22,29 @@ public class NounRecord: RecordBase
     public string Number { get; set; }
     public string Gender { get; set; }
 
-    public NounRecord(string wordMatch, string declension, string caseNumber, string number, string gender): base(wordMatch, PartsOfSpeech.Noun)
+    public NounRecord(string wordMatch, string declension, params string[] rest): base(wordMatch, PartsOfSpeech.Noun)
     {
         Declension = declension;
-        Case = caseNumber;
-        Number = number;
-        Gender = gender;
+
+        foreach (var code in rest)
+        {
+            if (CaseType.IsCase(code))
+            {
+                Case = code;
+                continue;
+            }
+
+            if (NumberType.IsNumber(code))
+            {
+                Number = code;
+                continue;
+            }
+
+            if (GenderType.IsGender(code))
+            {
+                Gender = code;
+            }
+        }
     }
     
     public override string ToJson()

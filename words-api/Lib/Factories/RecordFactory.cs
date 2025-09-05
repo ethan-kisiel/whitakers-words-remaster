@@ -17,26 +17,26 @@ namespace words_api.Lib.Factories;
 
 public class RecordFactory
 {
-    public static RecordBase GetRecord(string wordMatch, string partOfSpeech, params string[] wordParams)
+    public static RecordBase GetRecord(string wordMatch, string partOfSpeech, string declOrConj, params string[] wordParams)
     {
         switch (partOfSpeech)
         {
             case PartsOfSpeech.Adjective:
-                return new AdjectiveRecord(wordMatch, wordParams[0], wordParams[2], wordParams[3], wordParams[4], wordParams[5]);
+                return new AdjectiveRecord(wordMatch, declOrConj, wordParams);
             case PartsOfSpeech.Adverb:
-                return new AdverbRecord(wordMatch, wordParams[0]);
+                return new AdverbRecord(wordMatch, wordParams);
             case PartsOfSpeech.Noun:
-                return new NounRecord(wordMatch, wordParams[0], wordParams[2], wordParams[3], wordParams[4]);
+                return new NounRecord(wordMatch, declOrConj, wordParams);
             case PartsOfSpeech.Number:
-                return new NumeralRecord(wordMatch, wordParams[0], wordParams[2], wordParams[3], wordParams[4], wordParams[5]);
+                return new NumeralRecord(wordMatch, declOrConj, wordParams);
             case PartsOfSpeech.Pronoun:
-                return new PronounRecord(wordMatch, wordParams[0], wordParams[2], wordParams[3], wordParams[4]);
+                return new PronounRecord(wordMatch, declOrConj, wordParams);
             case PartsOfSpeech.Supine:
-                return new PronounRecord(wordMatch, wordParams[0], wordParams[2], wordParams[3], wordParams[4]);
+                return new PronounRecord(wordMatch, declOrConj, wordParams);
             case PartsOfSpeech.Verb:
-                return new VerbRecord(wordMatch, wordParams[0], wordParams[2..]);
+                return new VerbRecord(wordMatch, declOrConj, wordParams);
             case PartsOfSpeech.VerbParticiple:
-                return new VerbParticipleRecord(wordMatch, wordParams[0], wordParams[2], wordParams[3], wordParams[4], wordParams[5], wordParams[6], wordParams[7]);
+                return new VerbParticipleRecord(wordMatch, declOrConj, wordParams);
             default:
                 return new DefaultRecord(wordMatch, partOfSpeech);
         }

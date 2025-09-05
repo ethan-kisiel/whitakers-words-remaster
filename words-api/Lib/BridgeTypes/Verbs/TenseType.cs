@@ -24,6 +24,23 @@ public class TenseType
 
     public static bool IsTense(string input)
     {
-        return (input == Present || input == Imperfect || input == Future || input == Perfect || input == Pluperfect || input == FuturePerfect);
+        switch (input)
+        {
+            case Present:
+                return true;
+            case Imperfect:
+                return true;
+            case Future:
+                return true;
+            case Perfect:
+                return true;
+            case Pluperfect:
+                return true;
+            case FuturePerfect:
+                return true;
+            
+            default:
+                return false;
+        }
     }
 }

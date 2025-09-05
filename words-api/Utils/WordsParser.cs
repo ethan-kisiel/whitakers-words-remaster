@@ -13,6 +13,7 @@
 using System.Text.RegularExpressions;
 using words_api.Lib;
 using words_api.Lib.BridgeRecords;
+using words_api.Lib.Enums;
 using words_api.Lib.Factories;
 
 namespace words_api.Utils;
@@ -22,10 +23,22 @@ public class WordsParser
     
     private static RecordBase ParseRecord(string record)
     {
-        var words = Regex.Matches(record, RegexPatterns.CaptureResultGroupsPattern, RegexOptions.Multiline)
-            .Select<Match, string>(match => match.Groups[0].Value).ToArray();
+        // var words = Regex.Matches(record, RegexPatterns.CaptureResultGroupsPattern, RegexOptions.Multiline)
+        //     .Select<Match, string>(match => match.Groups[0].Value).ToArray();
+        var words = record.Split(" ").Where( word => !string.IsNullOrWhiteSpace(word)).ToList();
+        var match = words[0];
+        var pos = words[1];
 
-        return RecordFactory.GetRecord(words[0], words[1], words[2..]);
+        if (pos != PartsOfSpeech.Tackon || pos != PartsOfSpeech.Adverb)
+        {
+            var declOrConj = words[2];
+            words = words[4..];
+
+            return RecordFactory.GetRecord(match, pos, declOrConj, words.ToArray());
+        }
+        
+        words = words[4..];
+        return RecordFactory.GetRecord(match, pos, pos, words.ToArray());
     }
 
     private static DictionaryCodes ParseCodes(string codeString)

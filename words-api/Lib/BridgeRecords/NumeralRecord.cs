@@ -18,18 +18,40 @@ namespace words_api.Lib.BridgeRecords;
 public class NumeralRecord: RecordBase
 {
     public string Declension { get; set; }
-    public string Case { get; set; }
-    public string Number { get; set; }
-    public string Gender { get; set; }
-    public string NumeralSort { get; set; }
+    public string? Case { get; set; }
+    public string? Number { get; set; }
+    public string? Gender { get; set; }
+    public string? NumeralSort { get; set; }
 
-    public NumeralRecord(string wordMatch, string declension, string wordCase, string number, string gender, string numeralSort): base(wordMatch, PartsOfSpeech.Number)
+    public NumeralRecord(string wordMatch, string declension, params string[] rest): base(wordMatch, PartsOfSpeech.Number)
     {
         Declension = declension;
-        Case = wordCase;
-        Number = number;
-        Gender = gender;
-        NumeralSort = numeralSort;
+
+        foreach (var code in rest)
+        {
+            if (CaseType.IsCase(code))
+            {
+                Case = code;
+                continue;
+            }
+
+            if (NumberType.IsNumber(code))
+            {
+                Number = code;
+                continue;
+            }
+
+            if (GenderType.IsGender(code))
+            {
+                Gender = code;
+                continue;
+            }
+
+            if (NumeralSortType.IsNumeralSort(code))
+            {
+                NumeralSort = code;
+            }
+        }
     }
     
     public override string ToJson()
