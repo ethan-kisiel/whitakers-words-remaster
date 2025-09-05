@@ -12,7 +12,7 @@
 
 namespace words_api.Lib.Enums;
 
-public class Case
+public class CaseType
 {
     public const string Default = "X";
     public const string Nominative = "NOM";
@@ -22,4 +22,29 @@ public class Case
     public const string Dative = "DAT";
     public const string Ablative = "ABL";
     public const string Accusative = "ACC";
+
+
+    public static bool IsCase(string input)
+    {
+        switch (input)
+        {
+            case Nominative:
+                return true;
+            case Vocative:
+                return true;
+            case Genitive:
+                return true;
+            case Locative:
+                return true;
+            case Dative:
+                return true;
+            case Ablative:
+                return true;
+            case Accusative:
+                return true;
+            
+            default:
+                return false;
+        }
+    }
 }

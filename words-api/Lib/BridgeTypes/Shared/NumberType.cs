@@ -10,11 +10,27 @@
 // 
 // Copyright 2025 - 2025 Ethan Kisiel, Ethan Kisiel
 
+using System.Numerics;
+
 namespace words_api.Lib.Enums;
 
-public class Number
+public class NumberType
 {
     public const string Default = "X";
     public const string Singular = "S";
     public const string Plural = "P";
+
+    public static bool IsNumber(string input)
+    {
+        switch (input)
+        {
+            case Singular:
+                return true;
+            case Plural:
+                return true;
+            
+            default:
+                return false;
+        }
+    }
 }

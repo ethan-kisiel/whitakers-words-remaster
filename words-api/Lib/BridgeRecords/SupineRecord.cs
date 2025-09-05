@@ -18,16 +18,33 @@ namespace words_api.Lib.BridgeRecords;
 public class SupineRecord: RecordBase
 {
     public string Declension { get; set; }
-    public string Case { get; set; }
-    public string Number { get; set; }
-    public string Gender { get; set; }
+    public string? Case { get; set; }
+    public string? Number { get; set; }
+    public string? Gender { get; set; }
 
-    public SupineRecord(string wordMatch, string declension, string wordCase, string number, string gender): base(wordMatch, PartsOfSpeech.Supine)
+    public SupineRecord(string wordMatch, string declension, params string[] rest): base(wordMatch, PartsOfSpeech.Supine)
     {
         Declension = declension;
-        Case = wordCase;
-        Number = number;
-        Gender = gender;
+
+        foreach (var code in rest)
+        {
+            if (CaseType.IsCase(code))
+            {
+                Case = code;
+                continue;
+            }
+
+            if (NumberType.IsNumber(code))
+            {
+                Number = code;
+                continue;
+            }
+
+            if (GenderType.IsGender(code))
+            {
+                Gender = code;
+            }
+        }
     }
     
     public override string ToJson()

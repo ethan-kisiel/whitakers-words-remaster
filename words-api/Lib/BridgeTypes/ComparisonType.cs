@@ -12,10 +12,26 @@
 
 namespace words_api.Lib.Enums;
 
-public class Comparison
+public class ComparisonType
 {
     public const string Default = "X";
     public const string Positive = "POS";
     public const string Comparative = "COMP";
     public const string Superlative = "SUP";
+
+    public static bool IsComparison(string input)
+    {
+        switch (input)
+        {
+            case Positive:
+                return true;
+            case Comparative:
+                return true;
+            case Superlative:
+                return true;
+            
+            default:
+                return false;
+        }
+    }
 }

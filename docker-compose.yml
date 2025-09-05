@@ -11,7 +11,7 @@ services:
     expose:
       - "80"
     environment:
-      - API_ROUTE=http://76.185.207.28:443
+      - API_ROUTE=https://whitakers-words.com
     networks:
       - appnet
 

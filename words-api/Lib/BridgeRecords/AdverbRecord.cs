@@ -17,11 +17,17 @@ namespace words_api.Lib.BridgeRecords;
 
 public class AdverbRecord: RecordBase
 {
-    public string Comparison { get; set; }
+    public string? Comparison { get; set; }
 
-    public AdverbRecord(string wordMatch, string comparison): base(wordMatch, PartsOfSpeech.Adverb)
+    public AdverbRecord(string wordMatch, params string[] rest): base(wordMatch, PartsOfSpeech.Adverb)
     {
-        Comparison = comparison;
+        foreach (var code in rest)
+        {
+            if (ComparisonType.IsComparison(code))
+            {
+                Comparison = code;
+            }
+        }
     }
     
     public override string ToJson()

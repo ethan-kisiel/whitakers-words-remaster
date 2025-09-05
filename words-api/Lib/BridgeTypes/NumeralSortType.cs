@@ -12,11 +12,30 @@
 
 namespace words_api.Lib.Enums;
 
-public class NumeralSort
+public class NumeralSortType
 {
     public const string Default = "X";
     public const string Cardinal = "CARD";
     public const string Ordinal = "ORD";
     public const string Distributive = "DIST";
     public const string Adverb = "ADVERB";
+
+
+    public static bool IsNumeralSort(string input)
+    {
+        switch (input)
+        {
+            case Cardinal:
+                return true;
+            case Ordinal:
+                return true;
+            case Distributive:
+                return true;
+            case Adverb:
+                return true;
+            
+            default:
+                return false;
+        }
+    }
 }

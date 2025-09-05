@@ -10,7 +10,7 @@
 // 
 // Copyright 2025 - 2025 Ethan Kisiel, Ethan Kisiel
 
-namespace words_api.Lib.Enums;
+namespace words_api.Lib.BridgeTypes.Verbs;
 
 public class VoiceType
 {
@@ -20,6 +20,14 @@ public class VoiceType
 
     public static bool IsVoice(string input)
     {
-        return (input == Active || input == Passive);
+        switch (input)
+        {
+            case Active:
+                return true;
+            case Passive:
+                return true;
+            default:
+                return false;
+        }
     }
 }
