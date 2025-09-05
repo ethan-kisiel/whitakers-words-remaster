@@ -29,16 +29,23 @@ public class WordsParser
         var match = words[0];
         var pos = words[1];
 
-        if (pos != PartsOfSpeech.Tackon || pos != PartsOfSpeech.Adverb)
+        
+        if (pos == PartsOfSpeech.Adverb)
         {
-            var declOrConj = words[2];
-            words = words[4..];
-
-            return RecordFactory.GetRecord(match, pos, declOrConj, words.ToArray());
+            words = words[2..];
+            return RecordFactory.GetRecord(match, pos, pos, words.ToArray());
         }
         
+        if (pos == PartsOfSpeech.Tackon || pos == PartsOfSpeech.Prefix || pos == PartsOfSpeech.Suffix)
+        {
+            return RecordFactory.GetRecord(match, pos, pos, words.ToArray());
+        }
+        
+        var declOrConj = words[2];
         words = words[4..];
-        return RecordFactory.GetRecord(match, pos, pos, words.ToArray());
+
+        return RecordFactory.GetRecord(match, pos, declOrConj, words.ToArray());
+        
     }
 
     private static DictionaryCodes ParseCodes(string codeString)

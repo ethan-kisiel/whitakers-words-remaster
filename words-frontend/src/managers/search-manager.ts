@@ -20,7 +20,7 @@ async function handleInputEvent(event: unknown) {
 
         const dictionarySection = document.querySelector('#dictionary') as HTMLDivElement;
 
-        for (const res of result) {
+        for (const res of result.reverse()) {
 
             switch (searchType) {
                 case 'LATIN':
