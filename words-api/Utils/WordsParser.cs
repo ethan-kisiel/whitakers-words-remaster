@@ -18,7 +18,7 @@ using words_api.Lib.Factories;
 
 namespace words_api.Utils;
 
-public class WordsParser
+public static class WordsParser
 {
     
     private static RecordBase ParseRecord(string record)

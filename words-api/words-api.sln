@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "words-api", "words-api.csproj", "{9FC44FE8-9F45-4D56-8534-F9649F32DFE2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "words-api-tests", "..\words-api-tests\words-api-tests.csproj", "{ED501B90-6F61-462F-8056-1FBDED94C328}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{9FC44FE8-9F45-4D56-8534-F9649F32DFE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FC44FE8-9F45-4D56-8534-F9649F32DFE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FC44FE8-9F45-4D56-8534-F9649F32DFE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED501B90-6F61-462F-8056-1FBDED94C328}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED501B90-6F61-462F-8056-1FBDED94C328}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED501B90-6F61-462F-8056-1FBDED94C328}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED501B90-6F61-462F-8056-1FBDED94C328}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

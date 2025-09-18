@@ -12,18 +12,18 @@
 
 namespace words_api.Utils;
 
-public class SanitizeUtil
+public static class SanitizeUtil
 {
     public static string Sanitize(string input)
     {
         var chars = input.ToCharArray()
-            .Where(inChar => IsSafeChar(inChar));
+            .Where(IsSafeChar);
         
         return chars.Aggregate(string.Empty, (current, next) => current + next);
     }
 
     private static bool IsSafeChar(char character)
     {
-        return char.IsLetterOrDigit(character) || character == ' ';
+        return char.IsLetterOrDigit(character) || char.IsWhiteSpace(character);
     }
 }

@@ -13,7 +13,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Lib\BridgeTypes\Nouns\" />
+      <_ContentIncludedByDefault Remove="words-api-tests\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="words-api-tests\obj\project.packagespec.json" />
+      <_ContentIncludedByDefault Remove="words-api-tests\obj\words-api-tests.csproj.nuget.dgspec.json" />
     </ItemGroup>
 
 </Project>

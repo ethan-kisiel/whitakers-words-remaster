@@ -35,21 +35,22 @@ public class WordsUtil
             CreateNoWindow = true
         };
 
-        using var process = new Process { StartInfo = psi };
-        process.Start();
-
-        string output = process.StandardOutput.ReadToEnd();
-        string error = process.StandardError.ReadToEnd();
-        
-        process.WaitForExit();
-        
-        if (process.ExitCode != 0)
+        using (var process = new Process { StartInfo = psi })
         {
-            throw new Exception($"Words process failed: {error}");
-        }
+            process.Start();
+
+            string output = process.StandardOutput.ReadToEnd();
+            string error = process.StandardError.ReadToEnd();
         
-        Console.WriteLine(output);
-        return output;
+            process.WaitForExit();
+        
+            if (process.ExitCode != 0)
+            {
+                throw new Exception($"Words process failed: {error}");
+            }
+            
+            return output;
+        }
     }
 
     public string QueryLatin(string query)

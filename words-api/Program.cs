@@ -11,7 +11,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend",
-        policy => policy.WithOrigins("http://localhost:5174")
+        policy => policy.WithOrigins("http://localhost:5173")
             .AllowAnyHeader()
             .AllowAnyMethod());
 });
@@ -49,7 +49,7 @@ translate.MapGet("/latin/{entry}", (string entry) =>
     }
     catch (Exception ex)
     {
-        Console.WriteLine($"Something is fucked: {ex.Message}");
+        Console.WriteLine($"Something is fucked: {ex.Message}, {ex.StackTrace}");
         return [];
     }
 });
