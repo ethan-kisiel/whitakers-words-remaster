@@ -1,3 +1,5 @@
+import { Gender, type GenderValue } from "../lib/models/Gender";
+import { PartsOfSpeech, type PartsOfSpeechValue } from "../lib/models/PartOfSpeech";
 
 export class LatinSearchResult extends HTMLElement {
   public static observedAttributes = ['search-result'];
@@ -23,17 +25,17 @@ export class LatinSearchResult extends HTMLElement {
       <view-selector id="viewSelector" views-count='2'></view-selector>
       <div id="views">
         <div id="roots">
+            <div id="matches">
+            </div>
         </div>
 
-        <div id="matches">
-        </div>
       </div>
       </article>
       <hr>
       `;
 
-      this.generateRootLines();
       this.generateMatches();
+      this.generateRootLines();
 
       this.clearViews();
       this.showView(0);
@@ -83,7 +85,26 @@ export class LatinSearchResult extends HTMLElement {
 
   generateMatches() {
     const matchesDiv = this.querySelector('#matches') as HTMLDivElement;
-    for (const match of this.searchResult.recordMatches as []) {
+    const matchResults = this.searchResult.recordMatches as Record<string, string>[];
+
+    let isFirstElement = true;
+
+    for (const match of matchResults) {
+      if (isFirstElement) {
+        const partOfSpeech = matchResults[0].partOfSpeech as PartsOfSpeechValue;
+        const gender = matchResults[0].gender as GenderValue;
+
+        const partOfSpeechHtml = `${PartsOfSpeech.getLongForm(partOfSpeech)}`;
+
+        const genderHtml = gender ? `
+            <span class="tooltip" data-tooltip="${Gender.getLongForm(gender)}">${gender}.</span>
+        ` : '';
+
+        matchesDiv.innerHTML = `<h3>${matchResults[0].wordMatch} <small>${partOfSpeechHtml}</small> <small>${genderHtml}</small></h3>`;
+
+        isFirstElement = false;
+      }
+
       const newMatch = document.createElement('word-match');
       newMatch.setAttribute('match', JSON.stringify(match));
 

@@ -1,7 +1,6 @@
 import { Case, type CaseValue } from "../lib/models/Case";
-import { Gender, type GenderValue } from "../lib/models/Gender";
 import { WordNumber, type NumberValue } from "../lib/models/Number";
-import { PartsOfSpeech, type PartsOfSpeechValue } from "../lib/models/PartOfSpeech";
+import { type PartsOfSpeechValue } from "../lib/models/PartOfSpeech";
 import { Mood, type MoodValue } from "../lib/models/verb/Mood";
 import { Tense, type TenseValue } from "../lib/models/verb/Tense";
 import { Voice, type VoiceValue } from "../lib/models/verb/Voice";
@@ -19,7 +18,6 @@ export class WordMatch extends HTMLElement {
     private version?: string; // declension/conjugation
     private case?: CaseValue;
     private number?: NumberValue;
-    private gender?: GenderValue;
     private person?: string;
     private tense?: TenseValue;
     private voice?: VoiceValue;
@@ -44,7 +42,6 @@ export class WordMatch extends HTMLElement {
             this.version = matchLine.declension;
             this.case = matchLine.case;
             this.number = matchLine.number;
-            this.gender = matchLine.gender;
             this.person = matchLine.person;
             this.tense = matchLine.tense;
             this.voice = matchLine.voice;
@@ -55,16 +52,11 @@ export class WordMatch extends HTMLElement {
     }
 
     connectedCallback() {
-        const matchHtml = `${this.wordMatch}`;
-        const partOfSpeechHtml = `${PartsOfSpeech.getLongForm(this.pos)}`;
 
         const caseHtml = this.case ?
         `${Case.getLongForm(this.case)}`
         : '';
 
-        const genderHtml = this.gender ? `
-            <span class="tooltip" data-tooltip="${Gender.getLongForm(this.gender)}">${this.gender}.</span>
-        ` : '';
 
         const numberHtml = this.number ?
         `${WordNumber.getLongForm(this.number)}`
@@ -94,12 +86,10 @@ export class WordMatch extends HTMLElement {
         : '';
 
         const verbExtrasHtml = `${tenseHtml} ${voiceHtml} ${moodHtml}`;
-
+        const verbSeparator = (verbExtrasHtml.trim()) ? '<strong>-</strong>' : '';
 
         this.innerHTML = `
-        <h3>${matchHtml} <small>${genderHtml}</small></h3>
-        <small><p>${versionHtml} ${caseHtml} ${numberHtml} ${personHtml} ${partOfSpeechHtml}</p></small>
-        <small><p>${verbExtrasHtml}</p></small>
+        <small><p>${versionHtml} ${caseHtml} ${numberHtml} ${personHtml} ${verbSeparator} ${verbExtrasHtml}</p></small>
         `;
     }
 
