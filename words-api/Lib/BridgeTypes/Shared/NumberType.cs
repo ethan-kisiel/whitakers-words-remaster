@@ -10,9 +10,7 @@
 // 
 // Copyright 2025 - 2025 Ethan Kisiel, Ethan Kisiel
 
-using System.Numerics;
-
-namespace words_api.Lib.Enums;
+namespace words_api.Lib.BridgeTypes.Shared;
 
 public class NumberType
 {

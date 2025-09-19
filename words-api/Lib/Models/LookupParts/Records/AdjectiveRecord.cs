@@ -1,31 +1,32 @@
 // Project: words-api
-// File: SupineRecord.cs
+// File: Adjective.cs
 // 
 // Author: Ethan Kisiel (ethan.a.kisiel@gmail.com)
 // 
-// File Created: 24 08 2025 00:08:07
-// Last Modified: 24 08 2025 00:08:07
+// File Created: 24 08 2025 10:08:32
+// Last Modified: 24 08 2025 10:08:32
 // 
 // Modified By: Ethan Kisiel (ethan.a.kisiel@gmail.com>)
 // 
 // Copyright 2025 - 2025 Ethan Kisiel, Ethan Kisiel
 
 using System.Text.Json;
-using words_api.Lib.Enums;
+using words_api.Lib.BridgeTypes;
+using words_api.Lib.BridgeTypes.Shared;
 
-namespace words_api.Lib.BridgeRecords;
+namespace words_api.Lib.Models.LookupParts.Records;
 
-public class SupineRecord: RecordBase
+public class AdjectiveRecord : RecordBase
 {
     public string Declension { get; set; }
-    public string? Case { get; set; }
-    public string? Number { get; set; }
-    public string? Gender { get; set; }
+    public string Case { get; set; }
+    public string Number { get; set; }
+    public string Gender { get; set; }
+    public string Comparison { get; set; }
 
-    public SupineRecord(string wordMatch, string declension, params string[] rest): base(wordMatch, PartsOfSpeech.Supine)
+    public AdjectiveRecord(string wordMatch, string declension, params string[] rest): base(wordMatch, PartsOfSpeech.Adjective)
     {
         Declension = declension;
-
         foreach (var code in rest)
         {
             if (CaseType.IsCase(code))
@@ -43,10 +44,16 @@ public class SupineRecord: RecordBase
             if (GenderType.IsGender(code))
             {
                 Gender = code;
+                continue;
+            }
+
+            if (ComparisonType.IsComparison(code))
+            {
+                Comparison = code;
             }
         }
     }
-    
+
     public override string ToJson()
     {
         return JsonSerializer.Serialize(this);

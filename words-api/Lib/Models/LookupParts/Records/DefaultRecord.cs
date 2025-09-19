@@ -12,7 +12,7 @@
 
 using System.Text.Json;
 
-namespace words_api.Lib.BridgeRecords;
+namespace words_api.Lib.Models.LookupParts.Records;
 
 public class DefaultRecord: RecordBase
 {

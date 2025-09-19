@@ -12,20 +12,20 @@
 
 using System.Text.RegularExpressions;
 using words_api.Lib;
-using words_api.Lib.BridgeRecords;
-using words_api.Lib.Enums;
+using words_api.Lib.BridgeTypes.Shared;
 using words_api.Lib.Factories;
+using words_api.Lib.Models;
+using words_api.Lib.Models.LookupParts;
+using words_api.Lib.Models.LookupParts.Records;
 
-namespace words_api.Utils;
+namespace words_api.Service;
 
 public static class WordsParser
 {
     
     private static RecordBase ParseRecord(string record)
     {
-        // var words = Regex.Matches(record, RegexPatterns.CaptureResultGroupsPattern, RegexOptions.Multiline)
-        //     .Select<Match, string>(match => match.Groups[0].Value).ToArray();
-        var words = record.Split(" ").Where( word => !string.IsNullOrWhiteSpace(word)).ToList();
+        var words = record.Split(' ').Where( word => !string.IsNullOrWhiteSpace(word)).ToList();
         var match = words[0];
         var pos = words[1];
 
@@ -36,7 +36,7 @@ public static class WordsParser
             return RecordFactory.GetRecord(match, pos, pos, words.ToArray());
         }
         
-        if (pos == PartsOfSpeech.Tackon || pos == PartsOfSpeech.Prefix || pos == PartsOfSpeech.Suffix)
+        if (pos == PartsOfSpeech.Tackon || pos == PartsOfSpeech.Prefix || pos == PartsOfSpeech.Suffix || pos == PartsOfSpeech.Conjunction)
         {
             return RecordFactory.GetRecord(match, pos, pos, words.ToArray());
         }
@@ -56,10 +56,11 @@ public static class WordsParser
 
     private static RootLine ParseRootLine(string line, bool latinLookup=true)
     {
-        string regexToUse = latinLookup
+        var regexToUse = latinLookup
             ? RegexPatterns.LatinCaptureRootLinePattern
             : RegexPatterns.EnglishCaptureRootLinePattern;
         var rootLineMatch = Regex.Match(line, regexToUse);
+        
         // parse out base parse out codes
         var rootLine = new RootLine();
 

@@ -10,9 +10,7 @@
 // 
 // Copyright 2025 - 2025 Ethan Kisiel, Ethan Kisiel
 
-using System.Text.Json;
-
-namespace words_api.Lib.BridgeRecords;
+namespace words_api.Lib.Interfaces;
 
 public interface IBridgeRecordBase
 {

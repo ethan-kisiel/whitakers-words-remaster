@@ -1,32 +1,32 @@
 // Project: words-api
-// File: Pronoun.cs
+// File: Noun.cs
 // 
 // Author: Ethan Kisiel (ethan.a.kisiel@gmail.com)
 // 
-// File Created: 24 08 2025 00:08:59
-// Last Modified: 24 08 2025 00:08:59
+// File Created: 24 08 2025 00:08:25
+// Last Modified: 24 08 2025 00:08:25
 // 
 // Modified By: Ethan Kisiel (ethan.a.kisiel@gmail.com>)
 // 
 // Copyright 2025 - 2025 Ethan Kisiel, Ethan Kisiel
 
 using System.Text.Json;
-using words_api.Lib.Enums;
+using words_api.Lib.BridgeTypes.Shared;
 
-namespace words_api.Lib.BridgeRecords;
+namespace words_api.Lib.Models.LookupParts.Records;
 
-public class PronounRecord: RecordBase
+public class NounRecord: RecordBase
 {
     public string Declension { get; set; }
-    public string? Case { get; set; }
-    public string? Number { get; set; }
-    public string? Gender { get; set; }
+    public string Case { get; set; }
+    public string Number { get; set; }
+    public string Gender { get; set; }
 
-    public PronounRecord(string wordMatch, string declension, params string[] rest): base(wordMatch, PartsOfSpeech.Pronoun)
+    public NounRecord(string wordMatch, string declension, params string[] rest): base(wordMatch, PartsOfSpeech.Noun)
     {
         Declension = declension;
 
-        foreach (string code in rest)
+        foreach (var code in rest)
         {
             if (CaseType.IsCase(code))
             {

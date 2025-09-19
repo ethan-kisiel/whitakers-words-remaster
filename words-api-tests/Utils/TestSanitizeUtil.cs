@@ -10,7 +10,7 @@
 // 
 // Copyright 2025 - 2025 Ethan Kisiel, Ethan Kisiel
 
-using words_api.Utils;
+using words_api.Util;
 
 namespace words_api_tests.Utils;
 

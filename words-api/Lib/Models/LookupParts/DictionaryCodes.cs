@@ -10,7 +10,7 @@
 // 
 // Copyright 2025 - 2025 Ethan Kisiel, Ethan Kisiel
 
-namespace words_api.Lib;
+namespace words_api.Lib.Models.LookupParts;
 
 public struct DictionaryCodes
 {

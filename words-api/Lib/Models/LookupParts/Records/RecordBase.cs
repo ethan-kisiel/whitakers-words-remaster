@@ -11,8 +11,9 @@
 // Copyright 2025 - 2025 Ethan Kisiel, Ethan Kisiel
 
 using System.Text.Json.Serialization;
+using words_api.Lib.Interfaces;
 
-namespace words_api.Lib.BridgeRecords;
+namespace words_api.Lib.Models.LookupParts.Records;
 
 [JsonDerivedType(typeof(AdjectiveRecord))]
 [JsonDerivedType(typeof(AdverbRecord))]
@@ -30,7 +31,7 @@ public abstract class RecordBase: IBridgeRecordBase
 
     public abstract string ToJson();
 
-    public RecordBase(string wordMatch, string partOfSpeech)
+    protected RecordBase(string wordMatch, string partOfSpeech)
     {
         WordMatch = wordMatch;
         PartOfSpeech = partOfSpeech;

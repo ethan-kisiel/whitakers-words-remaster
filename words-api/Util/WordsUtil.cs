@@ -12,7 +12,7 @@
 
 using System.Diagnostics;
 
-namespace words_api.Utils;
+namespace words_api.Util;
 
 public class WordsUtil
 {
@@ -35,22 +35,20 @@ public class WordsUtil
             CreateNoWindow = true
         };
 
-        using (var process = new Process { StartInfo = psi })
-        {
-            process.Start();
+        using var process = new Process { StartInfo = psi };
+        process.Start();
 
-            string output = process.StandardOutput.ReadToEnd();
-            string error = process.StandardError.ReadToEnd();
-        
-            process.WaitForExit();
-        
-            if (process.ExitCode != 0)
-            {
-                throw new Exception($"Words process failed: {error}");
-            }
-            
-            return output;
+        var output = process.StandardOutput.ReadToEnd();
+        var error = process.StandardError.ReadToEnd();
+    
+        process.WaitForExit();
+    
+        if (process.ExitCode != 0)
+        {
+            throw new Exception($"Words process failed: {error}");
         }
+        
+        return output;
     }
 
     public string QueryLatin(string query)

@@ -11,9 +11,10 @@
 // Copyright 2025 - 2025 Ethan Kisiel, Ethan Kisiel
 
 using System.Text.Json;
-using words_api.Lib.Enums;
+using words_api.Lib.BridgeTypes;
+using words_api.Lib.BridgeTypes.Shared;
 
-namespace words_api.Lib.BridgeRecords;
+namespace words_api.Lib.Models.LookupParts.Records;
 
 public class AdverbRecord: RecordBase
 {

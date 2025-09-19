@@ -10,7 +10,7 @@
 // 
 // Copyright 2025 - 2025 Ethan Kisiel, Ethan Kisiel
 
-namespace words_api.Utils;
+namespace words_api.Util;
 
 public static class SanitizeUtil
 {

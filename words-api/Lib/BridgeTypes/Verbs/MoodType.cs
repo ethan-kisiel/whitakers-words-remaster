@@ -10,7 +10,7 @@
 // 
 // Copyright 2025 - 2025 Ethan Kisiel, Ethan Kisiel
 
-namespace words_api.Lib.Enums;
+namespace words_api.Lib.BridgeTypes.Verbs;
 
 public class MoodType
 {

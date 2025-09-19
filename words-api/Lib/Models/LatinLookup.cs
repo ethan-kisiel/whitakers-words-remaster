@@ -10,10 +10,10 @@
 // 
 // Copyright 2025 - 2025 Ethan Kisiel, Ethan Kisiel
 
-using words_api.Lib.BridgeRecords;
-using words_api.Lib.Interfaces;
+using words_api.Lib.Models.LookupParts;
+using words_api.Lib.Models.LookupParts.Records;
 
-namespace words_api.Lib;
+namespace words_api.Lib.Models;
 
 public class LatinLookup: LookupBase
 {

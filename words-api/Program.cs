@@ -1,4 +1,5 @@
-using words_api.Utils;
+using words_api.Service;
+using words_api.Util;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,10 +37,10 @@ translate.MapGet("/latin/{entry}", (string entry) =>
     try
     {
         
-        var sanitizedEntries = SanitizeUtil.Sanitize(entry).Split(' ').Where(e => !string.IsNullOrEmpty(e));
-        if (sanitizedEntries.Count() > 10)
+        var sanitizedEntries = SanitizeUtil.Sanitize(entry).Split(' ').Where(e => !string.IsNullOrEmpty(e)).ToArray();
+        if (sanitizedEntries.Length > 10)
         {
-            sanitizedEntries = sanitizedEntries.ToArray()[..10];
+            sanitizedEntries = sanitizedEntries[..10];
         }
         
         var result = sanitizedEntries.
@@ -59,10 +60,10 @@ translate.MapGet("/english/{entry}", (string entry) =>
     try
     {
         
-        var sanitizedEntries = SanitizeUtil.Sanitize(entry).Split(' ').Where(e => !string.IsNullOrEmpty(e));
-        if (sanitizedEntries.Count() > 10)
+        var sanitizedEntries = SanitizeUtil.Sanitize(entry).Split(' ').Where(e => !string.IsNullOrEmpty(e)).ToArray();
+        if (sanitizedEntries.Length > 10)
         {
-            sanitizedEntries = sanitizedEntries.ToArray()[..10];
+            sanitizedEntries = sanitizedEntries[..10];
         }
         
         var result = sanitizedEntries.

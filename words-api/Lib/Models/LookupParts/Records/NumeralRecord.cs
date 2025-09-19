@@ -1,28 +1,30 @@
 // Project: words-api
-// File: Noun.cs
+// File: Numeral.cs
 // 
 // Author: Ethan Kisiel (ethan.a.kisiel@gmail.com)
 // 
-// File Created: 24 08 2025 00:08:25
-// Last Modified: 24 08 2025 00:08:25
+// File Created: 24 08 2025 00:08:45
+// Last Modified: 24 08 2025 00:08:45
 // 
 // Modified By: Ethan Kisiel (ethan.a.kisiel@gmail.com>)
 // 
 // Copyright 2025 - 2025 Ethan Kisiel, Ethan Kisiel
 
 using System.Text.Json;
-using words_api.Lib.Enums;
+using words_api.Lib.BridgeTypes;
+using words_api.Lib.BridgeTypes.Shared;
 
-namespace words_api.Lib.BridgeRecords;
+namespace words_api.Lib.Models.LookupParts.Records;
 
-public class NounRecord: RecordBase
+public class NumeralRecord: RecordBase
 {
     public string Declension { get; set; }
-    public string Case { get; set; }
-    public string Number { get; set; }
-    public string Gender { get; set; }
+    public string? Case { get; set; }
+    public string? Number { get; set; }
+    public string? Gender { get; set; }
+    public string? NumeralSort { get; set; }
 
-    public NounRecord(string wordMatch, string declension, params string[] rest): base(wordMatch, PartsOfSpeech.Noun)
+    public NumeralRecord(string wordMatch, string declension, params string[] rest): base(wordMatch, PartsOfSpeech.Number)
     {
         Declension = declension;
 
@@ -43,6 +45,12 @@ public class NounRecord: RecordBase
             if (GenderType.IsGender(code))
             {
                 Gender = code;
+                continue;
+            }
+
+            if (NumeralSortType.IsNumeralSort(code))
+            {
+                NumeralSort = code;
             }
         }
     }

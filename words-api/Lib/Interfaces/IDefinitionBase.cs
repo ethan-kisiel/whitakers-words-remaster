@@ -10,6 +10,8 @@
 // 
 // Copyright 2025 - 2025 Ethan Kisiel, Ethan Kisiel
 
+using words_api.Lib.Models.LookupParts;
+
 namespace words_api.Lib.Interfaces;
 
 public interface IDefinitionBase

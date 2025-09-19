@@ -1,29 +1,28 @@
 // Project: words-api
-// File: Numeral.cs
+// File: SupineRecord.cs
 // 
 // Author: Ethan Kisiel (ethan.a.kisiel@gmail.com)
 // 
-// File Created: 24 08 2025 00:08:45
-// Last Modified: 24 08 2025 00:08:45
+// File Created: 24 08 2025 00:08:07
+// Last Modified: 24 08 2025 00:08:07
 // 
 // Modified By: Ethan Kisiel (ethan.a.kisiel@gmail.com>)
 // 
 // Copyright 2025 - 2025 Ethan Kisiel, Ethan Kisiel
 
 using System.Text.Json;
-using words_api.Lib.Enums;
+using words_api.Lib.BridgeTypes.Shared;
 
-namespace words_api.Lib.BridgeRecords;
+namespace words_api.Lib.Models.LookupParts.Records;
 
-public class NumeralRecord: RecordBase
+public class SupineRecord: RecordBase
 {
     public string Declension { get; set; }
     public string? Case { get; set; }
     public string? Number { get; set; }
     public string? Gender { get; set; }
-    public string? NumeralSort { get; set; }
 
-    public NumeralRecord(string wordMatch, string declension, params string[] rest): base(wordMatch, PartsOfSpeech.Number)
+    public SupineRecord(string wordMatch, string declension, params string[] rest): base(wordMatch, PartsOfSpeech.Supine)
     {
         Declension = declension;
 
@@ -44,12 +43,6 @@ public class NumeralRecord: RecordBase
             if (GenderType.IsGender(code))
             {
                 Gender = code;
-                continue;
-            }
-
-            if (NumeralSortType.IsNumeralSort(code))
-            {
-                NumeralSort = code;
             }
         }
     }

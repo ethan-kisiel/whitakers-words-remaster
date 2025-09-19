@@ -12,8 +12,8 @@ RUN make commands && make data
 
 # Build .NET project
 WORKDIR /dotnet
-COPY ./words-api /dotnet
-RUN dotnet publish -c Release -o /app/out
+COPY ./words-api /dotnet/words-api
+RUN dotnet publish words-api/words-api.csproj -c Release -o /app/out
 
 # Set working directory for runtime
 
