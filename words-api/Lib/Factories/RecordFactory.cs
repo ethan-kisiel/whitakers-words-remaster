@@ -15,7 +15,7 @@ using words_api.Lib.Models.LookupParts.Records;
 
 namespace words_api.Lib.Factories;
 
-public class RecordFactory
+public static class RecordFactory
 {
     public static RecordBase GetRecord(string wordMatch, string partOfSpeech, string declOrConj, params string[] wordParams)
     {
