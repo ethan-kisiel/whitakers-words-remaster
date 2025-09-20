@@ -332,6 +332,17 @@ button:active, .btn:active { transform: translateY(1px); }
   color: var(--ink-muted);
 }
 
+.dictionary-entry .dictionary-note {
+  font-size: var(--small);
+  color: var(--ink-muted);
+  margin: var(--space-2) 0;
+  padding: var(--space-2) var(--space-3);
+  background-color: var(--surface);
+  border-left: 3px solid var(--rule);
+  border-radius: 0.4rem;
+  line-height: 1.4;
+}
+
 
 small, figcaption, caption { font-size: var(--small); color: var(--ink-muted); }
 

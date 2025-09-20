@@ -22,20 +22,18 @@ export class LatinSearchResult extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
       <article class="dictionary-entry">
-      <view-selector id="viewSelector" views-count='2'></view-selector>
       <div id="views">
         <div id="roots">
-            <div id="matches">
-            </div>
         </div>
-
+        <div id="matches" class="dictionary-note">
+        </div>
       </div>
       </article>
       <hr>
       `;
 
-      this.generateMatches();
       this.generateRootLines();
+      this.generateMatches();
 
       this.clearViews();
       this.showView(0);
@@ -57,6 +55,7 @@ export class LatinSearchResult extends HTMLElement {
   }
 
   clearViews(){
+    return;
     const viewDiv = this.querySelector('#views') as HTMLDivElement;
 
     for (const child of viewDiv.children) {
@@ -100,7 +99,7 @@ export class LatinSearchResult extends HTMLElement {
             <span class="tooltip" data-tooltip="${Gender.getLongForm(gender)}">${gender}.</span>
         ` : '';
 
-        matchesDiv.innerHTML = `<h3>${matchResults[0].wordMatch} <small>${partOfSpeechHtml}</small> <small>${genderHtml}</small></h3>`;
+        matchesDiv.innerHTML = `<h5>${matchResults[0].wordMatch} <small>${partOfSpeechHtml}</small> <small>${genderHtml}</small></h5>`;
 
         isFirstElement = false;
       }
