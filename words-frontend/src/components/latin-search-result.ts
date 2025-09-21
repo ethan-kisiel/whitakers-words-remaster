@@ -15,7 +15,6 @@ export class LatinSearchResult extends HTMLElement {
   attributeChangedCallback(name: string, _: unknown, newValue: string) {
       if (name === 'search-result') {
           this.searchResult = JSON.parse(newValue);
-          console.log(newValue);
       }
   }
 
@@ -34,33 +33,11 @@ export class LatinSearchResult extends HTMLElement {
 
       this.generateRootLines();
       this.generateMatches();
-
-      this.clearViews();
-      this.showView(0);
-      const viewSelector = this.querySelector('#viewSelector') as HTMLElement;
-
-      viewSelector.addEventListener('viewSelected', (event) => {
-        const viewDiv = this.querySelector('#views') as HTMLDivElement;
-        const viewsCount = viewDiv.children.length;
-        const viewIndex = (event as CustomEvent).detail.index % viewsCount;
-
-        this.clearViews();
-        this.showView(viewIndex);
-      });
   }
   showView(index: number) {
     const viewDiv = this.querySelector('#views') as HTMLDivElement;
 
    (viewDiv.children[index] as HTMLElement).style.display = 'block';
-  }
-
-  clearViews(){
-    return;
-    const viewDiv = this.querySelector('#views') as HTMLDivElement;
-
-    for (const child of viewDiv.children) {
-      (child as HTMLElement).style.display = 'none';
-    }
   }
 
 

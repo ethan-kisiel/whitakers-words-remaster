@@ -13,7 +13,6 @@ export class EnglishSearchResult extends HTMLElement {
   attributeChangedCallback(name: string, _: unknown, newValue: string) {
       if (name === 'search-result') {
           this.searchResult = JSON.parse(newValue);
-          console.log(newValue);
       }
   }
 

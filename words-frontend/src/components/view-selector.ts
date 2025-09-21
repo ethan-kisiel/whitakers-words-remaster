@@ -101,7 +101,6 @@ export class ViewSelector extends HTMLElement {
     }
 
     emitNewViewSelected(index: number) {
-        console.log(index);
         const event = new CustomEvent('viewSelected', {
             bubbles: true,
             cancelable: true,

@@ -1,5 +1,6 @@
 import WordsHttpClient from '../utils/WordsHttpClient';
 import { InputFieldWithButton } from '../components/input-field-with-button';
+import { addSearch, fetchRecentSearches } from './session-storage-manager';
 
 let searchType: 'LATIN' | 'ENGLISH' = 'LATIN';
 
@@ -14,23 +15,40 @@ const englishSearch = document.querySelector('#select-english-search') as HTMLAn
 latinSearch.addEventListener('click', () => {changeSearchType('LATIN')});
 englishSearch.addEventListener('click', () => {changeSearchType('ENGLISH')});
 
+window.addEventListener('load', () => {
+    const recentSearches = fetchRecentSearches();
+
+    for (const search of recentSearches) {
+        const searchType = search.isLatin ? 'LATIN' : 'ENGLISH';
+
+        delete search.isLatin;
+
+        addResult(search as unknown as string, searchType);
+    }
+});
+
 async function handleInputEvent(event: unknown) {
     const result = (await WordsHttpClient.shared
         .getTranslation(searchType, (event as CustomEvent).detail.value));
 
-        const dictionarySection = document.querySelector('#dictionary') as HTMLDivElement;
+    for (const res of result.reverse()) {
+        addSearch(res, searchType === 'LATIN');
+        addResult(res, searchType);
+    }
+}
 
-        for (const res of result.reverse()) {
 
-            switch (searchType) {
-                case 'LATIN':
-                    addLatinResult(res, dictionarySection);
-                    break;
-                case 'ENGLISH':
-                    addEnglishResult(res, dictionarySection);
-                    break;
-            }
-        }
+function addResult(result: string, searchType: 'LATIN' | 'ENGLISH') {
+    const dictionarySection = document.querySelector('#dictionary') as HTMLDivElement;
+
+    switch (searchType) {
+        case 'LATIN':
+            addLatinResult(result, dictionarySection);
+            break;
+        case 'ENGLISH':
+            addEnglishResult(result, dictionarySection);
+            break;
+    }
 }
 
 function addLatinResult(data: string, dictionarySection: HTMLDivElement) {
