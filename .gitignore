@@ -24,3 +24,6 @@ words/src/latin_utils/latin_utils-config.adb
 words/.gitignore
 
 words-api/obj/
+words-api/bin/
+words-api-tests/bin/
+

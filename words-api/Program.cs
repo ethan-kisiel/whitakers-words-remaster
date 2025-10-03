@@ -50,7 +50,6 @@ translate.MapGet("/latin/{entry}", (string entry) =>
     }
     catch (Exception ex)
     {
-        Console.WriteLine($"Something is fucked: {ex.Message}, {ex.StackTrace}");
         return [];
     }
 });
@@ -73,7 +72,6 @@ translate.MapGet("/english/{entry}", (string entry) =>
     }
     catch (Exception ex)
     {
-        Console.WriteLine(ex.Message);
         return [];
     }
 });

@@ -19,15 +19,8 @@ public class RegexPatterns
     public const string RecordMatchPattern = @"^\S+\s+[A-Z]{1,10}";
     public const string DefinitionPattern = @"([^;]+;)";
 
-    public const string CaptureDictionaryCodesPattern = @"\[([A-Z]{5})]$";
-
     public const string EnglishCaptureRootLinePattern =  @"^(?:(?<roots>\S+(?:[,\s*]\S+)*))?(?:\s+(?<pos>[A-Z]+))?(?:\s+(?<iter>\([^)]*\)))?(?:\s+(?:(?<gender>(?=(?:N|ADJ)\b)[MFNC])|(?<kind>(?!(?:N|ADJ)\b)(?:\S+(?:\s+\S+)?))))?(?:\s+\d+\s+\d+(?:\s+[A-Z]+)?)?\s*\[(?<dictCodes>[A-Z]{5})\]$";
     
     public const string LatinCaptureRootLinePattern =
         @"^(?:(?<roots>\S+(?:[,\s*]\S+)*))?(?:\s+(?<pos>[A-Z]+))?(?:\s+(?<iter>\([^)]*\)))?(?:\s+(?:(?<gender>(?=(?:N|ADJ)\b)[MFNC])|(?<kind>(?!(?:N|ADJ)\b)(?:\S+(?:\s+\S+)?))))?(\s?)+\[(?<dictCodes>[A-Z]{5})\]$";
-        
-    
-    //@"^(?<roots>\S+(?:[,\s*]\S+)*)\s+(?<pos>[A-Z]+)(?:\s+(?<iter>\([^)]*\)))?(?:\s+(?<gender>[MFNC]))?\s+\[(?<dictCodes>[A-Z]{5})\]$";
-
-    public const string CaptureResultGroupsPattern = @"(\S+)"; // capture all the characters from the record
 }

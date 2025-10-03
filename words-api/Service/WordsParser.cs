@@ -50,7 +50,6 @@ public static class WordsParser
 
     private static DictionaryCodes ParseCodes(string codeString)
     {
-        Console.WriteLine(codeString);
         return new DictionaryCodes(codeString[0], codeString[1], codeString[2], codeString[3], codeString[4]);
     }
 
@@ -71,7 +70,6 @@ public static class WordsParser
         if (rootLineMatch.Groups["roots"].Success)
         {
             rootLine.Root = rootLineMatch.Groups["roots"].Value;
-            Console.WriteLine(rootLine.Root);
         }
 
         if (rootLineMatch.Groups["pos"].Success)
@@ -113,7 +111,6 @@ public static class WordsParser
     {
         var lookup = new EnglishLookup();
         
-        Console.Write(roots.Length);
         lookup.RootLines = roots;
         lookup.Meanings = meaningLine.Split(';')
             .Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
@@ -132,12 +129,9 @@ public static class WordsParser
         foreach (var line in input.Split('\n'))
         {
             var trimmedLine = line.Trim('\n').Trim(' ').Trim('*');
-            Console.WriteLine(trimmedLine);
-            
             
             if (Regex.IsMatch(trimmedLine, RegexPatterns.DefinitionPattern)) // we have hit a definition
             {
-                Console.WriteLine("Definition Match");
                 currentMeaningLine = $"{currentMeaningLine}{trimmedLine}";
                 continue;
             }
@@ -145,7 +139,6 @@ public static class WordsParser
             
             if (Regex.IsMatch(trimmedLine, RegexPatterns.WordRootLineMatchPattern))
             {
-                Console.WriteLine("Word Root Match");
                 try
                 {
                     if (currentMeaningLine != string.Empty)
@@ -158,16 +151,14 @@ public static class WordsParser
                     
                     currentRootLines.Add(ParseRootLine(trimmedLine, false));
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    Console.WriteLine($"Soemthing went wrong: {e.Message}");
                 }
             }
         }
         
         if (currentMeaningLine != string.Empty)
         {
-            Console.WriteLine($"WRITING LAST LOOKUP: {currentRootLines.Count}, MEANING: {currentMeaningLine}");
             lookupResults.Add(CreateEnglishLookup(currentRootLines.ToArray(), currentMeaningLine, searchQuery));
             
             currentRootLines.Clear();
@@ -201,26 +192,22 @@ public static class WordsParser
         foreach (var line in input.Split('\n'))
         {
             var trimmedLine = line.Trim(' ').Trim('\n');
-            Console.WriteLine(trimmedLine);
             
             if (Regex.IsMatch(trimmedLine, RegexPatterns.DefinitionPattern)) // we have hit a definition
             {
-                Console.WriteLine("Definition Match");
                 currentMeaningLine = $"{currentMeaningLine}{trimmedLine}";
                 continue;
             }
 
             if (Regex.IsMatch(trimmedLine, RegexPatterns.WordRootLineMatchPattern))
             {
-                Console.WriteLine("Word Root Match");
                 try
                 {
                     currentRootLines.Add(ParseRootLine(trimmedLine));
                     continue;
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    Console.WriteLine($"Soemthing went wrong: {e.Message}");
                 }
             }
             
@@ -234,7 +221,6 @@ public static class WordsParser
                     currentRecords.Clear();
                     currentRootLines.Clear();
                 }
-                Console.WriteLine("Record Match");
                 currentRecords.Add(ParseRecord(line));
             }
         }

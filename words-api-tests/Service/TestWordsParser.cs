@@ -60,6 +60,27 @@ not, by no means, no; [non modo ... sed etiam => not only ... but also];
         Assert.IsTrue(results[0].RecordMatches.Any());
         Assert.IsTrue(results[0].Meanings.Any(m => m.Contains("by no means")));
     }
+    
+    
+    [TestMethod]
+    public void ParseLatinSearch_ShouldParsePrepositionRecord()
+    {
+        // Arrange: an adverb entry triggers the adverb branch
+        string input = @"
+per                  PREP   ACC                         
+per  PREP  ACC   [XXXAX]  
+through (space); during (time); by, by means of;
+";
+        string searchQuery = "per";
+
+        // Act
+        var results = WordsParser.ParseLatinSearch(input, searchQuery);
+
+        // Assert
+        Assert.IsTrue(results.Length > 0);
+        Assert.IsTrue(results[0].RecordMatches.Any());
+        Assert.IsTrue(results[0].Meanings.Any(m => m.Contains("through(space)")));
+    }
 
     [TestMethod]
     public void ParseLatinSearch_ShouldParseConjunctionRecord()
