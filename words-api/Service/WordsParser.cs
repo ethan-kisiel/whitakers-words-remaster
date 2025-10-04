@@ -35,6 +35,12 @@ public static class WordsParser
             words = words[2..];
             return RecordFactory.GetRecord(match, pos, pos, words.ToArray());
         }
+
+        if (pos == PartsOfSpeech.Preposition)
+        {
+            var wordCase = words[2];
+            return RecordFactory.GetRecord(match, pos, wordCase, words.ToArray());
+        }
         
         if (pos == PartsOfSpeech.Tackon || pos == PartsOfSpeech.Prefix || pos == PartsOfSpeech.Suffix || pos == PartsOfSpeech.Conjunction)
         {

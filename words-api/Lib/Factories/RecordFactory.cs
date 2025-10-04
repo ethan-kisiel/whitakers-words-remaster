@@ -37,6 +37,8 @@ public static class RecordFactory
                 return new VerbRecord(wordMatch, declOrConj, wordParams);
             case PartsOfSpeech.VerbParticiple:
                 return new VerbParticipleRecord(wordMatch, declOrConj, wordParams);
+            case PartsOfSpeech.Preposition:
+                return new PrepositionRecord(wordMatch, declOrConj, wordParams);
             default:
                 return new DefaultRecord(wordMatch, partOfSpeech);
         }

@@ -24,6 +24,7 @@ namespace words_api.Lib.Models.LookupParts.Records;
 [JsonDerivedType(typeof(SupineRecord))]
 [JsonDerivedType(typeof(VerbRecord))]
 [JsonDerivedType(typeof(VerbParticipleRecord))]
+[JsonDerivedType(typeof(PrepositionRecord))]
 public abstract class RecordBase: IBridgeRecordBase
 {
     public string WordMatch { get; set; }

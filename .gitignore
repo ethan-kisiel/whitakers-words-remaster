@@ -25,5 +25,6 @@ words/.gitignore
 
 words-api/obj/
 words-api/bin/
+words-api-tests/obj/
 words-api-tests/bin/
 
