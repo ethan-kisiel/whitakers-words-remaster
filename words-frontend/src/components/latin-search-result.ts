@@ -44,8 +44,12 @@ export class LatinSearchResult extends HTMLElement {
   generateRootLines() {
     const rootsDiv = this.querySelector('#roots') as HTMLDivElement;
     for (const line of this.searchResult.rootLines as []) {
+      let lineAsRecord = line as Record<string, string>
+      if (!lineAsRecord.root) {
+        lineAsRecord.root = this.searchResult.searchQuery as string;
+      }
       const newRoot = document.createElement('root-line');
-      newRoot.setAttribute('line', JSON.stringify(line));
+      newRoot.setAttribute('line', JSON.stringify(lineAsRecord));
 
       rootsDiv.appendChild(newRoot);
     }
