@@ -10,6 +10,8 @@
 // 
 // Copyright 2025 - 2025 Ethan Kisiel, Ethan Kisiel
 
+using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using words_api.Service;
 using words_api.Util;
 

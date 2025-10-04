@@ -17,12 +17,10 @@ namespace words_api.Lib.Models.LookupParts.Records;
 
 public class PrepositionRecord: RecordBase
 {
-    public string Declension { get; set; }
     public string Case { get; set; }
 
     public PrepositionRecord(string wordMatch, string declension, params string[] rest): base(wordMatch, PartsOfSpeech.Preposition)
     {
-        Declension = declension;
         foreach (var code in rest)
         {
             if (CaseType.IsCase(code))

@@ -302,7 +302,6 @@ button:active, .btn:active { transform: translateY(1px); }
 .dictionary-entry h3 {
   font-family: var(--serif);
   font-size: 1.2rem;
-  font-style: italic;
   margin: 0 0 var(--space-2);
 }
 

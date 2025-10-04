@@ -39,7 +39,7 @@ export class WordMatch extends HTMLElement {
             this.wordMatch = matchLine.wordMatch;
             this.pos = matchLine.partOfSpeech;
 
-            this.version = matchLine.declension;
+            this.version = matchLine.declension ?? matchLine.conjugation ?? matchLine.version;
             this.case = matchLine.case;
             this.number = matchLine.number;
             this.person = matchLine.person;

@@ -11,6 +11,7 @@
 // Copyright 2025 - 2025 Ethan Kisiel, Ethan Kisiel
 
 using words_api.Util;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace words_api_tests.Utils;
 
