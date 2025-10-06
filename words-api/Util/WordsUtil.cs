@@ -78,7 +78,9 @@ public class WordsUtil
         }
         try
         {
-            return Run($"~e {query}");
+            var result = Run($"~e {query}");
+            Console.WriteLine(result);
+            return result;
         }
         catch (Exception e)
         {

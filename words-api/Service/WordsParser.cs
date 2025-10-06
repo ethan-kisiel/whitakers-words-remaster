@@ -42,7 +42,7 @@ public static class WordsParser
             return RecordFactory.GetRecord(match, pos, wordCase, words.ToArray());
         }
         
-        if (pos == PartsOfSpeech.Tackon || pos == PartsOfSpeech.Prefix || pos == PartsOfSpeech.Suffix || pos == PartsOfSpeech.Conjunction)
+        if (pos == PartsOfSpeech.Tackon || pos == PartsOfSpeech.Prefix || pos == PartsOfSpeech.Suffix || pos == PartsOfSpeech.Conjunction || pos == PartsOfSpeech.Interjection)
         {
             return RecordFactory.GetRecord(match, pos, pos, words.ToArray());
         }
@@ -159,6 +159,7 @@ public static class WordsParser
                 }
                 catch (Exception ex)
                 {
+                    Console.WriteLine(ex.Message);
                 }
             }
         }
