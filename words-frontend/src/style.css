@@ -348,3 +348,100 @@ small, figcaption, caption { font-size: var(--small); color: var(--ink-muted); }
 .one-line {
   display: flex;
 }
+
+
+
+
+
+/* =====================================================================
+   Snackbar — theme-textbook-snackbar.css
+   Fits seamlessly with theme-textbook.css
+   ===================================================================== */
+
+.snackbar {
+  position: fixed;
+  bottom: var(--space-5);
+  left: 50%;
+  transform: translateX(-50%) translateY(120%);
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: var(--small);
+  line-height: 1.5;
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
+  opacity: 0;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  pointer-events: none;
+
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Active (visible) state */
+.snackbar.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+/* Variants (info, success, warning, error) */
+.snackbar--info {
+  border-left: 4px solid var(--accent);
+}
+
+.snackbar--success {
+  border-left: 4px solid #4caf50;
+}
+
+.snackbar--warning {
+  border-left: 4px solid #ffb300;
+}
+
+.snackbar--error {
+  border-left: 4px solid #d32f2f;
+}
+
+/* Snackbar message text */
+.snackbar__message {
+  flex: 1;
+}
+
+/* Close button (small ×) */
+.snackbar__close {
+  background: none;
+  border: none;
+  color: var(--ink-muted);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 4px;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.snackbar__close:hover {
+  color: var(--accent);
+  background: var(--paper-deckle);
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .snackbar {
+    background: #2a2622;
+    color: var(--ink);
+    border-color: var(--rule);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+  }
+
+  .snackbar__close:hover {
+    background: #33302b;
+  }
+}

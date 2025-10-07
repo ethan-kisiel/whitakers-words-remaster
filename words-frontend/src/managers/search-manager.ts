@@ -1,6 +1,7 @@
 import WordsHttpClient from '../utils/WordsHttpClient';
 import { InputFieldWithButton } from '../components/input-field-with-button';
 import { addSearch, fetchRecentSearches } from './session-storage-manager';
+import { Snackbar } from '../components/snackbar';
 
 let searchType: 'LATIN' | 'ENGLISH' = 'LATIN';
 
@@ -30,6 +31,14 @@ window.addEventListener('load', () => {
 async function handleInputEvent(event: unknown) {
     const result = (await WordsHttpClient.shared
         .getTranslation(searchType, (event as CustomEvent).detail.value));
+
+    if (!result || result.length === 0) {
+        const snackbar = document.querySelector(Snackbar.htmlName) as Snackbar;
+        snackbar.addSnack('No results found.', 'error');
+    }
+    else {
+        console.log(result);
+    }
 
     for (const res of result.reverse()) {
         addSearch(res, searchType === 'LATIN');

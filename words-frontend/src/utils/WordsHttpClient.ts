@@ -15,10 +15,14 @@ export default class WordsHttpClient {
             const languageRoute = `${endpoint}/${language.toLowerCase()}`
             const response =  await fetch(`${languageRoute}/${queryString}`);
 
+            if (!response.ok) {
+                return false;
+            }
+
             return await response.json();
         } catch (ex) {
             // log goes here
-            throw ex;
+            return false;
         }
     }
 }
