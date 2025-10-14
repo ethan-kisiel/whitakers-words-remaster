@@ -57,6 +57,7 @@ body {
   hyphens: auto;
 }
 
+
 .book {
   max-width: var(--measure);
   margin: min(6vh, var(--space-6)) auto;
@@ -82,11 +83,13 @@ header.book-header, footer.book-footer {
 }
 
 footer.book-footer {
+  bottom: 0;
   border-bottom: 0;
   border-top: 1px solid var(--rule);
   margin-top: var(--space-5);
   padding-top: var(--space-2);
 }
+
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--serif);
