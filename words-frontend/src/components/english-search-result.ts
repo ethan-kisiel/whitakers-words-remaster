@@ -1,19 +1,10 @@
+import SearchResult from "../core/SearchResult";
 
-export class EnglishSearchResult extends HTMLElement {
-  public static observedAttributes = ['search-result'];
+export class EnglishSearchResult extends SearchResult {
   public static htmlName = 'english-search-result';
-
-  public declare searchResult: Record<string, unknown>;
-
 
   constructor() {
     super();
-  }
-
-  attributeChangedCallback(name: string, _: unknown, newValue: string) {
-      if (name === 'search-result') {
-          this.searchResult = JSON.parse(newValue);
-      }
   }
 
   connectedCallback() {
@@ -23,6 +14,9 @@ export class EnglishSearchResult extends HTMLElement {
       <div id="views">
         <div id="roots">
         </div>
+      </div>
+      <div>
+        <a class='removeSearchButton'>X</a>
       </div>
       </article>
       <hr>
@@ -42,6 +36,11 @@ export class EnglishSearchResult extends HTMLElement {
         this.clearViews();
         this.showView(viewIndex);
       });
+
+      const removeButton = this.querySelector('.removeSearchButton') as HTMLButtonElement;
+      removeButton.addEventListener('click', (_) => {
+        this.emitRemoveEvent();
+      });
   }
   showView(index: number) {
     const viewDiv = this.querySelector('#views') as HTMLDivElement;
@@ -57,19 +56,18 @@ export class EnglishSearchResult extends HTMLElement {
     }
   }
 
-
   generateRootLines() {
     const rootsDiv = this.querySelector('#roots') as HTMLDivElement;
-    for (const line of this.searchResult.rootLines as []) {
+    for (const line of this._searchResult.rootLines as []) {
       const newRoot = document.createElement('root-line');
       newRoot.setAttribute('line', JSON.stringify(line));
 
       rootsDiv.appendChild(newRoot);
     }
 
-    const meaningsHtml = this.searchResult.meanings ? `
+    const meaningsHtml = this._searchResult.meanings ? `
       <p>
-       ${(this.searchResult.meanings as []).join(';')}.
+       ${(this._searchResult.meanings as []).join(';')}.
       </p>
     ` : '';
 

@@ -295,6 +295,7 @@ button:active, .btn:active { transform: translateY(1px); }
 
 /* Dictionary entry styling */
 .dictionary-entry {
+  position: relative;
   margin: var(--space-5) 0;
   padding: var(--space-4);
   border-left: 4px solid var(--accent);
@@ -343,6 +344,17 @@ button:active, .btn:active { transform: translateY(1px); }
   border-left: 3px solid var(--rule);
   border-radius: 0.4rem;
   line-height: 1.4;
+}
+
+.removeSearchButton {
+  position: absolute;
+  top: 6px;      /* adjust to taste */
+  right: 6px;    /* adjust to taste */
+  border: none;
+  border-radius: 4px;
+  padding: 4px 4px;
+  cursor: pointer;
+  font-weight: bold;
 }
 
 

@@ -1,21 +1,12 @@
+import SearchResult from "../core/SearchResult";
 import { Gender, type GenderValue } from "../lib/models/Gender";
 import { PartsOfSpeech, type PartsOfSpeechValue } from "../lib/models/PartOfSpeech";
 
-export class LatinSearchResult extends HTMLElement {
-  public static observedAttributes = ['search-result'];
+export class LatinSearchResult extends SearchResult {
   public static htmlName = 'latin-search-result';
-
-  public declare searchResult: Record<string, unknown>;
-
 
   constructor() {
     super();
-  }
-
-  attributeChangedCallback(name: string, _: unknown, newValue: string) {
-      if (name === 'search-result') {
-          this.searchResult = JSON.parse(newValue);
-      }
   }
 
   connectedCallback() {
@@ -27,26 +18,34 @@ export class LatinSearchResult extends HTMLElement {
         <div id="matches" class="dictionary-note">
         </div>
       </div>
+      <div>
+        <a class='removeSearchButton'>X</a>
+      </div>
       </article>
       <hr>
       `;
 
       this.generateRootLines();
       this.generateMatches();
+
+      const removeButton = this.querySelector('.removeSearchButton') as HTMLButtonElement;
+      removeButton.addEventListener('click', (_) => {
+        this.emitRemoveEvent();
+      });
   }
+
   showView(index: number) {
     const viewDiv = this.querySelector('#views') as HTMLDivElement;
 
    (viewDiv.children[index] as HTMLElement).style.display = 'block';
   }
 
-
   generateRootLines() {
     const rootsDiv = this.querySelector('#roots') as HTMLDivElement;
-    for (const line of this.searchResult.rootLines as []) {
+    for (const line of this._searchResult.rootLines as []) {
       let lineAsRecord = line as Record<string, string>
       if (!lineAsRecord.root) {
-        lineAsRecord.root = this.searchResult.searchQuery as string;
+        lineAsRecord.root = this._searchResult.searchQuery as string;
       }
       const newRoot = document.createElement('root-line');
       newRoot.setAttribute('line', JSON.stringify(lineAsRecord));
@@ -54,9 +53,9 @@ export class LatinSearchResult extends HTMLElement {
       rootsDiv.appendChild(newRoot);
     }
 
-    const meaningsHtml = this.searchResult.meanings ? `
+    const meaningsHtml = this._searchResult.meanings ? `
       <p>
-       ${(this.searchResult.meanings as []).join(';')}.
+       ${(this._searchResult.meanings as []).join(';')}.
       </p>
     ` : '';
 
@@ -65,7 +64,7 @@ export class LatinSearchResult extends HTMLElement {
 
   generateMatches() {
     const matchesDiv = this.querySelector('#matches') as HTMLDivElement;
-    const matchResults = this.searchResult.recordMatches as Record<string, string>[];
+    const matchResults = this._searchResult.recordMatches as Record<string, string>[];
 
     let isFirstElement = true;
 

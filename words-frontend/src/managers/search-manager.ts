@@ -1,6 +1,6 @@
 import WordsHttpClient from '../utils/WordsHttpClient';
 import { InputFieldWithButton } from '../components/input-field-with-button';
-import { addSearch, fetchRecentSearches } from './session-storage-manager';
+import { addSearch, fetchRecentSearches, removeSearch } from './session-storage-manager';
 import { Snackbar } from '../components/snackbar';
 
 let searchType: 'LATIN' | 'ENGLISH' = 'LATIN';
@@ -21,10 +21,12 @@ window.addEventListener('load', () => {
 
     for (const search of recentSearches) {
         const searchType = search.isLatin ? 'LATIN' : 'ENGLISH';
+        const uniqueId = search.uniqueId;
 
         delete search.isLatin;
+        delete search.uniqueId
 
-        addResult(search as unknown as string, searchType);
+        addResult(search as unknown as string, searchType, uniqueId);
     }
 });
 
@@ -41,37 +43,58 @@ async function handleInputEvent(event: unknown) {
     }
 
     for (const res of result.reverse()) {
-        addSearch(res, searchType === 'LATIN');
-        addResult(res, searchType);
+        const uniqueId = crypto.randomUUID();
+        addSearch(res, searchType === 'LATIN', uniqueId);
+        addResult(res, searchType, uniqueId);
     }
 }
 
 
-function addResult(result: string, searchType: 'LATIN' | 'ENGLISH') {
+function addResult(result: string, searchType: 'LATIN' | 'ENGLISH', uniqueId: string) {
     const dictionarySection = document.querySelector('#dictionary') as HTMLDivElement;
 
     switch (searchType) {
         case 'LATIN':
-            addLatinResult(result, dictionarySection);
+            addLatinResult(result, dictionarySection, uniqueId);
             break;
         case 'ENGLISH':
-            addEnglishResult(result, dictionarySection);
+            addEnglishResult(result, dictionarySection, uniqueId);
             break;
     }
 }
 
-function addLatinResult(data: string, dictionarySection: HTMLDivElement) {
+function addLatinResult(data: string, dictionarySection: HTMLDivElement, uniqueId: string) {
     const element = document.createElement('latin-search-result');
     element.setAttribute('search-result', JSON.stringify(data));
+    element.setAttribute('unique-id', uniqueId);
+
+    element.addEventListener('removeSearchResult', (event) => {
+        const detail = (event as CustomEvent).detail;
+        removeSearchResult(detail.uniqueId);
+    });
 
     dictionarySection.prepend(element);
 }
 
-function addEnglishResult(data: string, dictionarySection: HTMLDivElement) {
+function addEnglishResult(data: string, dictionarySection: HTMLDivElement, uniqueId: string) {
     const element = document.createElement('english-search-result');
     element.setAttribute('search-result', JSON.stringify(data));
+    element.setAttribute('unique-id', uniqueId);
+
+    element.addEventListener('removeSearchResult', (event) => {
+        const detail = (event as CustomEvent).detail;
+        removeSearchResult(detail.uniqueId);
+    });
 
     dictionarySection.prepend(element);
+}
+
+function removeSearchResult(uniqueId: string) {
+    const element = document.getElementById(uniqueId);
+    if (element) {
+        removeSearch(element.id);
+        element.remove();
+    }
 }
 
 
